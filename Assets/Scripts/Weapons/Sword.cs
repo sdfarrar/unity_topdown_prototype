@@ -1,20 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Sword : Weapon {
 
+	public bool instantStab;
+
 	private Animator animator;
-	//private bool isAttacking = false;
 
 	private void Start(){
 		animator = GetComponent<Animator>();
 	}
 
+	public override int GetIndex(){
+		return 0;
+	}
+
 	public override void PrimaryAttack(){
 		if(isAttacking){ return; }
 		Debug.Log("PrimaryAttack");
-		animator.Play("stab_up", -1, 0f);
+		if(instantStab){
+			animator.Play("stab_up_instant", -1, 0f);
+		}else{
+			animator.Play("stab_up", -1, 0f);
+		}
 	}
 
 	public override void AlternateAttack(){
@@ -23,11 +30,4 @@ public class Sword : Weapon {
 		animator.Play("slice_up", -1, 0f);
 	}
 
-	//public override void AttackEnd(){
-	//	isAttacking = false;
-	//}
-
-	//public override void AttackStart(){
-	//	isAttacking = true;
-	//}
 }
