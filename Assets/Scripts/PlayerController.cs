@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour {
 
 	void Start () {
 		weapons = GetComponentsInChildren<Weapon>();
-		//activeWeapon = weapons.Where( weapon => weapon.GetIndex()==currentWeaponSlot ).First();
 		ChangeWeapon();
 	}
 	
@@ -41,6 +40,7 @@ public class PlayerController : MonoBehaviour {
 
 	private void ChangeWeapon(){
 		activeWeapon = weapons.Where( weapon => weapon.GetIndex()==currentWeaponSlot ).First();
+		activeWeapon.Activate();
 		lastWeaponSlot = currentWeaponSlot;
 	}
 

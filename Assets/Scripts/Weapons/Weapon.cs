@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Perhaps this would work better as a scriptable object?
 public abstract class Weapon : MonoBehaviour {
 
-	private static GameObject weaponGO; // if not static then other subclasses break things when setting this to inactive
+	public GameObject weaponGO; // should probably be extracted out into some weapon manager class
 
 	private new SpriteRenderer renderer;
 	private new BoxCollider2D collider;
+
+	private bool isActive;
 
 	protected bool isAttacking;
 
@@ -18,20 +19,20 @@ public abstract class Weapon : MonoBehaviour {
 
 	public abstract void PrimaryAttack();
 	public abstract void AlternateAttack();
-	public abstract int GetIndex(); // crappy way but it works for now. it'd probably be better if we had an array somewhere
+	public abstract int GetIndex();
 
 	void Awake () {
 		renderer = GetComponentInChildren<SpriteRenderer>();
-		renderer.sprite = image;
-		renderer.color = tint;
 
 		collider = GetComponentInChildren<BoxCollider2D>();
 		if(collider!=null){
 			collider.enabled = hasCollider;
 		}
 
-		weaponGO = GameObject.FindWithTag("Weapon");
-		//weaponGO.SetActive(false); // setting this to inactive will break when having multiple child classes
+	}
+
+	void Start(){
+		weaponGO.SetActive(false); 
 	}
 
 	public void AttackStart(){
@@ -42,5 +43,10 @@ public abstract class Weapon : MonoBehaviour {
 	public void AttackEnd(){
 		isAttacking = false;
 		weaponGO.SetActive(false);
+	}
+
+	public void Activate(){
+		renderer.sprite = image;
+		renderer.color = tint;
 	}
 }

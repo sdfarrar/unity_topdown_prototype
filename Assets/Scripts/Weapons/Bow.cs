@@ -5,15 +5,15 @@ public class Bow : Weapon {
 	public GameObject arrow;
 
 	public override int GetIndex(){
-		return 1;
+	return 1;
 	}
 
-    public override void PrimaryAttack() {
+	public override void PrimaryAttack() {
 		Debug.Log("Bow.PrimaryAttack");
 	}
 
-    public override void AlternateAttack() {
+	public override void AlternateAttack() {
 		PrimaryAttack();
-    }
+	}
 
 }
