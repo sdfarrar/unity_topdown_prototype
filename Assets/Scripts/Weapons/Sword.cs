@@ -14,7 +14,7 @@ public class Sword : Weapon {
 		return 0;
 	}
 
-	public override void PrimaryAttack(){
+	public override void PrimaryAttack(Vector2 direction){
 		if(isAttacking){ return; }
 		Debug.Log("PrimaryAttack");
 		if(instantStab){
@@ -24,7 +24,7 @@ public class Sword : Weapon {
 		}
 	}
 
-	public override void AlternateAttack(){
+	public override void AlternateAttack(Vector2 direction){
 		if(isAttacking){ return; }
 		Debug.Log("AlternateAttack");
 		animator.Play("slice_up", -1, 0f);

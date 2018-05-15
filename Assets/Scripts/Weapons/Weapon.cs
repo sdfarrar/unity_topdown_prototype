@@ -17,8 +17,8 @@ public abstract class Weapon : MonoBehaviour {
 	public Color tint;
 	public bool hasCollider;
 
-	public abstract void PrimaryAttack();
-	public abstract void AlternateAttack();
+	public abstract void PrimaryAttack(Vector2 direction);
+	public abstract void AlternateAttack(Vector2 direction);
 	public abstract int GetIndex();
 
 	void Awake () {

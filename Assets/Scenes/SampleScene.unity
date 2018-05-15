@@ -1281,6 +1281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeab1da40fe556745ba5b4376db3047d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponGO: {fileID: 129352795}
   image: {fileID: 21300000, guid: 758381c0b5a6f6446b39e7895fe945de, type: 3}
   tint: {r: 1, g: 0.7914926, b: 0, a: 1}
   hasCollider: 1
@@ -1314,10 +1315,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e302120ada7a2f439e21083fc7c4bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponGO: {fileID: 129352795}
   image: {fileID: 0}
   tint: {r: 0, g: 0, b: 0, a: 0}
   hasCollider: 0
-  arrow: {fileID: 1938255646563312, guid: a672e1f88c5da004cbdc111cd8d0e1f0, type: 2}
+  arrow: {fileID: 114361101463901152, guid: a672e1f88c5da004cbdc111cd8d0e1f0, type: 2}
 --- !u!1 &462990649
 GameObject:
   m_ObjectHideFlags: 0

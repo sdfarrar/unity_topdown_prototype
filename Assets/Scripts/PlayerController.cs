@@ -11,16 +11,19 @@ public class PlayerController : MonoBehaviour {
 	public int currentWeaponSlot;
 	private int lastWeaponSlot;
 
+	private Vector2 direction;
+
 	void Start () {
+		direction = Vector2.up;
 		weapons = GetComponentsInChildren<Weapon>();
 		ChangeWeapon();
 	}
 	
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.K)){
-			activeWeapon.PrimaryAttack();
+			activeWeapon.PrimaryAttack(direction);
 		}else if(Input.GetKeyDown(KeyCode.L)){
-			activeWeapon.AlternateAttack();
+			activeWeapon.AlternateAttack(direction);
 		}
 
 		CheckChangeWeaponInput();
