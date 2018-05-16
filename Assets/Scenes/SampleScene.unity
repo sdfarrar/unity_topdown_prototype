@@ -11229,7 +11229,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &1147728038
 MonoBehaviour:
@@ -11243,6 +11243,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  dashSpeed: 50
+  dashTime: 0.1
+  dashEffect: {fileID: 1844731348692496, guid: 0d241215501ea0f4cbcb19cb7c4d795b, type: 2}
 --- !u!61 &1147728039
 BoxCollider2D:
   m_ObjectHideFlags: 0

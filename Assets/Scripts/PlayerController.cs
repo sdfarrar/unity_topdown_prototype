@@ -13,17 +13,20 @@ public class PlayerController : MonoBehaviour {
 
 	private Vector2 direction;
 
+	private PlayerMovement movement;
+
 	void Start () {
 		direction = Vector2.up;
 		weapons = GetComponentsInChildren<Weapon>();
+		movement = GetComponent<PlayerMovement>();
 		ChangeWeapon();
 	}
 	
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.K)){
-			activeWeapon.PrimaryAttack(direction);
+			activeWeapon.PrimaryAttack(movement.GetFacing());
 		}else if(Input.GetKeyDown(KeyCode.L)){
-			activeWeapon.AlternateAttack(direction);
+			activeWeapon.AlternateAttack(movement.GetFacing());
 		}
 
 		CheckChangeWeaponInput();
