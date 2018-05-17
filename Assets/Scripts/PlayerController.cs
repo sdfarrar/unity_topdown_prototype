@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour {
 			currentWeaponSlot = 0;
 		}else if(Input.GetKeyDown(KeyCode.Alpha2)){
 			currentWeaponSlot = 1;
+		}else if(Input.GetKeyDown(KeyCode.Alpha3)){
+			currentWeaponSlot = 2;
 		}
 
 	}
