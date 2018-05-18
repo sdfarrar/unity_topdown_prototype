@@ -16,7 +16,13 @@ public class Bomb : MonoBehaviour {
 
 	private void Update() {
 		elapsedTime+=Time.deltaTime;
+		if(elapsedTime>explosionDelay*.66f){
+			anim.speed = 1.5f;
+		}else if(elapsedTime>explosionDelay*.33f){
+			anim.speed = 1.25f;
+		}
 		if(elapsedTime>=explosionDelay){
+			anim.speed = 1;
 			Explode();
 		}
 	}
