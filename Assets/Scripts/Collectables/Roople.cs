@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireTagAttribute("Collectable")]
 [RequireComponent(typeof(SpriteRenderer))]
 public class Roople : MonoBehaviour, ICollectable {
 
