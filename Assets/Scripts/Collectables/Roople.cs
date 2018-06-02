@@ -17,4 +17,5 @@ public class Roople : MonoBehaviour, ICollectable {
 	public void OnCollect(){
 		Destroy(this.gameObject);
 	}
+
 }

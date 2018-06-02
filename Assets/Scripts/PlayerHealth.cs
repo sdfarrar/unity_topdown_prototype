@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 //TODO perhaps this is better a GameEventListener that listens for player health changes,
 //then move damaged event to damagedealer script
-public class PlayerHealth : MonoBehaviour {
+public class PlayerHealth : MonoBehaviour, IDamageable {
 
 	public IntegerVariable HP;
 	public bool ResetHP;
@@ -26,14 +26,14 @@ public class PlayerHealth : MonoBehaviour {
 	/// </summary>
 	/// <param name="other">The other Collider2D involved in this collision.</param>
 	private void OnTriggerEnter2D(Collider2D other) {
-		DamageDealer damage = other.gameObject.GetComponent<DamageDealer>();
-		if(damage!=null){ TakeDamage(damage); }
+		//DamageDealer damage = other.gameObject.GetComponent<DamageDealer>();
+		//if(damage!=null){ TakeDamage(damage); }
 
 		HealthReplenisher replenisher = other.gameObject.GetComponent<HealthReplenisher>();
 		if(replenisher!=null){ GetHealth(replenisher); }
 	}
 
-	private void TakeDamage(DamageDealer damage){
+	public void TakeDamage(DamageDealer damage){
 		HP.ApplyChange(-damage.DamageAmount);
 		if(HP.Value>0){
 			DamageEvent.Invoke();
@@ -45,6 +45,7 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	private void GetHealth(HealthReplenisher replenisher){
+		//TODO dont exceed max health
 		HP.ApplyChange(replenisher.HealAmount);
 		if(HP.Value>MaxHP.Value){ HP.SetValue(MaxHP); }
 

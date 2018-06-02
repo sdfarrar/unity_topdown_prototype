@@ -1,18 +1,32 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-[CustomPropertyDrawer(typeof(IntegerReference))]
-public class StringReferenceDrawer : PropertyDrawer {
+[CustomPropertyDrawer(typeof(VariableReference), true)]
+public class VariableReferenceDrawer : PropertyDrawer {
+	protected SerializedProperty useConstant;
+	protected SerializedProperty constantValue;
+	protected SerializedProperty variable;
 
 	/// <summary>
 	/// Options to display in the popup to select constant or variable
 	/// </summary>
-	private readonly string[] popupOptions = {"Use Constant", "Use Variable"};
+	protected readonly string[] popupOptions = {"Use Constant", "Use Variable"};
 
 	/// <summary>
 	/// Cached style to use to draw the popup button
 	/// </summary>
-	private GUIStyle popupStyle;
+	protected GUIStyle popupStyle;
+
+	protected void LoadProperties(SerializedProperty property){
+		useConstant = property.FindPropertyRelative("UseConstant");
+		constantValue = property.FindPropertyRelative("ConstantValue");
+		variable = property.FindPropertyRelative("Variable");
+	}
+
+	public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
+		LoadProperties(property);
+		return base.GetPropertyHeight(property, label);
+	}
 
 	/// <summary>
 	/// OnGUI is called for rendering and handling GUI events.
@@ -29,16 +43,9 @@ public class StringReferenceDrawer : PropertyDrawer {
 		
 		EditorGUI.BeginChangeCheck();
 
-		// Get properties
-		SerializedProperty useConstant = property.FindPropertyRelative("UseConstant");
-		SerializedProperty constantValue = property.FindPropertyRelative("ConstantValue");
-		SerializedProperty variable = property.FindPropertyRelative("Variable");
-
 		// Calculate rect for configuration button
-		Rect btnRect = new Rect(position);
-		btnRect.yMin += popupStyle.margin.top;
-		btnRect.width = popupStyle.fixedWidth + popupStyle.margin.right;
-		position.xMin = btnRect.xMax;
+		Rect btnRect = CalculateButtonRect(position);
+		position.xMin = CaclulatePositionXMin(btnRect);
 
 		// Store old indent level and set it to 0... the PrefixLabel takes care of it
 		int indent = EditorGUI.indentLevel;
@@ -48,9 +55,10 @@ public class StringReferenceDrawer : PropertyDrawer {
 
 		useConstant.boolValue = (result == 0);
 
+		// Show either varible or constant field
 		EditorGUI.PropertyField(position, 
 			useConstant.boolValue ? constantValue : variable, 
-			GUIContent.none);
+			GUIContent.none, true);
 
 		if(EditorGUI.EndChangeCheck()){
 			property.serializedObject.ApplyModifiedProperties();
@@ -58,6 +66,17 @@ public class StringReferenceDrawer : PropertyDrawer {
 
 		EditorGUI.indentLevel = indent;
 		EditorGUI.EndProperty();
+	}
+
+	public virtual Rect CalculateButtonRect(Rect position){
+		Rect btnRect = new Rect(position);
+		btnRect.yMin += popupStyle.margin.top;
+		btnRect.width = popupStyle.fixedWidth + popupStyle.margin.right;
+		return btnRect;
+	}
+
+	public virtual float CaclulatePositionXMin(Rect btnRect){
+		return btnRect.xMax;
 	}
 }
 
