@@ -15,6 +15,12 @@ public class VariableCreateContextMenu {
 	[MenuItem("Assets/Create/Variables/StringList")]
 	static void CreateStringListVariable(){ CreateVariable<StringListVariable>("StringListVariable"); }
 
+	[MenuItem("Assets/Create/Variables/Material")]
+	static void CreateMaterialVariable(){ CreateVariable<MaterialVariable>("MaterialVariable"); }
+
+	[MenuItem("Assets/Create/Variables/Texture")]
+	static void CreateTextureVariable(){ CreateVariable<TextureVariable>("TextureVariable"); }
+
 	private static void CreateVariable<T>(string placeholderFilename) where T : ScriptableObject {
 		T asset = ScriptableObject.CreateInstance<T>();
 		// setup asset if needed

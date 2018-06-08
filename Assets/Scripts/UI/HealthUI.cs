@@ -13,17 +13,13 @@ public class HealthUI : MonoBehaviour {
 
 	private List<Image> hearts;
 
-	/// <summary>
-	/// Start is called on the frame when a script is enabled just before
-	/// any of the Update methods is called the first time.
-	/// </summary>
 	private void Start(){
 		Image[] images = GetComponentsInChildren<Image>();
 		hearts = new List<Image>(images);
-		Debug.Log("current hearts: " + hearts.Count);
-		foreach (var image in hearts){
-			Debug.Log(image.name);
-		}
+		//Debug.Log("current hearts: " + hearts.Count);
+		//foreach (var image in hearts){
+		//	Debug.Log(image.name);
+		//}
 	}
 
 	public void OnHealthDamaged(){
