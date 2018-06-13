@@ -28,7 +28,6 @@ public abstract class Weapon : MonoBehaviour {
 		if(collider!=null){
 			collider.enabled = hasCollider;
 		}
-
 	}
 
 	void Start(){
@@ -38,11 +37,13 @@ public abstract class Weapon : MonoBehaviour {
 	public void AttackStart(){
 		isAttacking = true;
 		weaponGO.SetActive(true);
+		if(collider!=null){	collider.enabled = hasCollider;	}
 	}
 
 	public void AttackEnd(){
 		isAttacking = false;
 		weaponGO.SetActive(false);
+		if(collider!=null){	collider.enabled = hasCollider;	}
 	}
 
 	public void Activate(){

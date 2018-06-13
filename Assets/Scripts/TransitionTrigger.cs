@@ -22,11 +22,13 @@ public class TransitionTrigger : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
+		if(!other.CompareTag("Player")){ return; }
 		if(Template.TransitionTexture!=null){ TransitionTexture.Value = Template.TransitionTexture; }
 		StepOnEvent.Invoke();
 	}
 
 	void OnTriggerExit2D(Collider2D other){
+		if(!other.CompareTag("Player")){ return; }
 		StepOffEvent.Invoke();
 	}
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Weapon
   - Collectable
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -20,13 +21,13 @@ TagManager:
   - 
   - 
   - 
+  - Player
+  - Obstacle
+  - Attackable
+  - Destructible
+  - Interactables
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - AttackableInteractables
   - 
   - 
   - 
@@ -48,6 +49,12 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 1175777601
+    locked: 0
+  - name: Interactables
+    uniqueID: 2154304943
+    locked: 0
+  - name: Enemy
+    uniqueID: 3234570823
     locked: 0
   - name: Player
     uniqueID: 528102539
