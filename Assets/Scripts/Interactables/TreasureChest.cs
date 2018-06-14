@@ -22,14 +22,15 @@ public class TreasureChest : MonoBehaviour, IInteractable {
 		UpdateSprite();
 	}
 
-	public void OnInteract(PlayerController player){
-		if(!closed){ return; } // already looted
+	public bool OnInteract(PlayerController player){
+		if(!closed){ return false; } // already looted
 
 		Debug.Log(gameObject.name + " was interacted with");
 		closed = false;
 		UpdateSprite();
 		//TODO attempt to add contents to player
 		//if player cannot hold, reset to closed
+		return true;
 	}
 
 	private void UpdateSprite(){

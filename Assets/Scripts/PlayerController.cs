@@ -27,13 +27,13 @@ public class PlayerController : MonoBehaviour {
 	private BoxCollider2D InteractiveArea;
 
 	private Transform LiftPosition;
+	private ILiftable LiftedObject;
 
 	private Collider2D[] ColliderBuffer = new Collider2D[8];
 	private Collider2D[] InteractablesBuffer = new Collider2D[4];
 	private Collider2D[] LiftablesBuffer = new Collider2D[4];
 
-	private PlayerState CurrentState, PreviousState;
-	public PlayerState State; //temp
+	public PlayerState State;
 
 	void Start () {
 		direction = Vector2.up;
@@ -49,18 +49,13 @@ public class PlayerController : MonoBehaviour {
 		PlayerInput.Update();
 		CheckChangeWeaponInput();
 
-		if(PlayerInput.AttackPressed){
-			Attack();
-		}else if(PlayerInput.InteractPressed){
-			if(State.carrying){
-				ThrowObject();
-			}else{
-				Interact();
-				LiftObject();
-			}
+		switch(State){
+			case PlayerState.EMPTY: HandleEmpty(); break;
+			case PlayerState.CARRY: HandleCarrying(); break;
+			case PlayerState.INTERACT: HandleInteracting();	break;
+			case PlayerState.GRAB: HandleGrabbing(); break;
+			case PlayerState.ATTACK: HandleAttacking();	break;
 		}
-
-		PreviousState = CurrentState;
 	}
 
 	public Vector2 GetSize(){
@@ -71,48 +66,74 @@ public class PlayerController : MonoBehaviour {
 		return LiftPosition;
 	}
 
-	private void Attack() {
-		if(State.carrying){
-			//Drop object?
-		}else{
-			//Attack with sword
-			//int count = Physics2D.OverlapCircleNonAlloc(transform.position, 1, ColliderBuffer, Attackables);
-			//Debug.Log("we hit: " + count + " things");
-			//activeWeapon.PrimaryAttack(movement.GetFacing());
+	private void HandleEmpty(){
+		if(PlayerInput.InteractPressed){
+			if(Interact()){
+				State = PlayerState.INTERACT;
+			}else if(LiftObject()){
+				State = PlayerState.CARRY;
+			}
 		}
+	}
+
+	private void HandleCarrying(){
+		if(PlayerInput.InteractPressed && LiftedObject!=null){
+			ThrowObject();
+			State = PlayerState.EMPTY;
+		}
+
+	}
+
+	private void HandleInteracting(){
+		if(PlayerInput.InteractHeldDown){
+			State = PlayerState.GRAB;
+		}else{
+			State = PlayerState.EMPTY;
+		}
+	}
+
+	private void HandleGrabbing(){
+		if(!PlayerInput.InteractHeldDown){
+			State = PlayerState.EMPTY;
+			return;
+		}
+		//TODO do grab things
+	}
+
+	private void HandleAttacking(){
+
+	}
+
+	private void Attack() {
+		//if(State.carrying){
+		//	//Drop object?
+		//}else{
+		//	//Attack with sword
+		//	//int count = Physics2D.OverlapCircleNonAlloc(transform.position, 1, ColliderBuffer, Attackables);
+		//	//Debug.Log("we hit: " + count + " things");
+		//	//activeWeapon.PrimaryAttack(movement.GetFacing());
+		//}
 	}
 
 	private void ThrowObject() {
-		State.carrying = false;
-		if(State.liftedObject==null){ return; } // shouldnt happen 
 		Vector3 throwDistance = new Vector2(3, 3);
 		Vector3 target = movement.GetFacing() * throwDistance;
-		State.liftedObject.OnThrow(target);
-		State.liftedObject = null;
+		LiftedObject.OnThrow(target);
+		LiftedObject = null;
 	}
 
-	private void Interact() {
-		if(State.interacting){ return; }
-
+	private bool Interact() {
 		IInteractable interactable = GetClosest<IInteractable>(InteractablesBuffer, Interactables);
-		if(interactable==null){
-			State.interacting = false;
-			return;
-		}
-		interactable.OnInteract(this);
-		//State.interacting = true; //TODO uncomment when we figure things out
+		if(interactable==null){	return false; }
+		return interactable.OnInteract(this);
 	}
 
-	private void LiftObject() {
-		if(State.carrying){ return; }
-
+	private bool LiftObject() {
 		ILiftable liftable = GetClosest<ILiftable>(LiftablesBuffer, Interactables);
-		if(liftable==null){ return; } 
+		if(liftable==null || !liftable.OnPickedUp(this)){ return false; } 
 
-		if(liftable.OnPickedUp(this)){
-			State.carrying = true;
-			State.liftedObject = liftable;
-		}
+		LiftedObject = liftable;
+		return true;
 	}
 
 	private T GetClosest<T>(Collider2D[] buffer, LayerMask layerMask){
@@ -156,26 +177,15 @@ public class PlayerController : MonoBehaviour {
 		public T obj;
 	}
 
-	[System.Serializable]
-	public struct PlayerState {
-		public bool idle;
-		public bool attacking;
-		public bool interacting;
-
-		public bool carrying;
-		public ILiftable liftedObject;
-
-		public void Reset(){
-			idle = false;
-			attacking = false;
-			carrying = false;
-			interacting = false;
-			liftedObject = null;
-		}
+	public enum PlayerState {
+		EMPTY,
+		ATTACK,
+		CARRY,
+		INTERACT,
+		GRAB
 	}
 
 #if UNITY_EDITOR
-
 	void OnDrawGizmosSelected()	{
 		if(Input.GetKey(KeyCode.Keypad5)){
 			Handles.color = Color.red;

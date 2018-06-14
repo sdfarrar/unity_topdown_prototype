@@ -8,10 +8,11 @@ public class Sign : LiftableObject, IInteractable {
 	private const string PLAYER_LAYER = "Player";
 
 
-	public void OnInteract(PlayerController player) {
-		if(CanInteract(player)){
-			Debug.Log(Text.Value); //TODO open up dialog... Freeze player?
-		}
+	public bool OnInteract(PlayerController player) {
+		if(!CanInteract(player)){ return false; }
+
+		Debug.Log(Text.Value); //TODO open up dialog... Freeze player?
+		return true;
 	}
 
 	private bool CanInteract(PlayerController player) {
