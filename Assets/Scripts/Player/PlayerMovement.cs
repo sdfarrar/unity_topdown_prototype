@@ -18,17 +18,18 @@ public class PlayerMovement : MonoBehaviour {
 
 	private Vector2 moveVelocity;
 	private Rigidbody2D rb;
+	public PlayerInput playerInput;
 
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 	}
 	
 	void Update () {
-		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		Vector2 input = new Vector2(playerInput.HorizontalRaw, playerInput.VerticalRaw).normalized;
 		moveVelocity = input * speed;
 
 		UpdateDirection();
-		if(!dashing && direction!=0 && Input.GetKeyDown(KeyCode.Space)){
+		if(!dashing && direction!=0 && playerInput.DashPressed){
 			dashing = true;
 			Instantiate(dashEffect, transform.position, Quaternion.identity);
 		}

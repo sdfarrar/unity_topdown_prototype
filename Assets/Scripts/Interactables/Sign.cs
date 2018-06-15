@@ -5,9 +5,6 @@ public class Sign : LiftableObject, IInteractable {
 
 	public StringReference Text;
 
-	private const string PLAYER_LAYER = "Player";
-
-
 	public bool OnInteract(PlayerController player) {
 		if(!CanInteract(player)){ return false; }
 

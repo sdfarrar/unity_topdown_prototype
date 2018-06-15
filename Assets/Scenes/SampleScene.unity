@@ -1565,7 +1565,8 @@ GameObject:
   - component: {fileID: 293432963}
   - component: {fileID: 293432962}
   - component: {fileID: 293432964}
-  m_Layer: 0
+  - component: {fileID: 293432965}
+  m_Layer: 14
   m_Name: grass_rock_heavy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1656,6 +1657,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &293432965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 293432961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec9882b64620d4449c3a72c69af1243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RequiredItem: {fileID: 0}
 --- !u!1 &395292937
 GameObject:
   m_ObjectHideFlags: 0
@@ -2512,7 +2525,7 @@ GameObject:
   - component: {fileID: 645474119}
   - component: {fileID: 645474121}
   - component: {fileID: 645474120}
-  m_Layer: 17
+  m_Layer: 14
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13128,6 +13141,7 @@ MonoBehaviour:
   dashSpeed: 50
   dashTime: 0.1
   dashEffect: {fileID: 1844731348692496, guid: 0d241215501ea0f4cbcb19cb7c4d795b, type: 2}
+  playerInput: {fileID: 11400000, guid: 57e264c1a9e91ad44a0217b197336356, type: 2}
 --- !u!61 &1147728039
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13171,12 +13185,11 @@ MonoBehaviour:
   Interactables:
     serializedVersion: 2
     m_Bits: 655360
+  Grabables:
+    serializedVersion: 2
+    m_Bits: 147456
   currentWeaponSlot: 0
-  State:
-    idle: 0
-    attacking: 0
-    interacting: 0
-    carrying: 0
+  State: 0
 --- !u!114 &1147728041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13862,7 +13875,8 @@ GameObject:
   - component: {fileID: 1696477432}
   - component: {fileID: 1696477431}
   - component: {fileID: 1696477430}
-  m_Layer: 0
+  - component: {fileID: 1696477433}
+  m_Layer: 14
   m_Name: grass_rock_heavy (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13953,6 +13967,18 @@ Transform:
   m_Father: {fileID: 1174393166}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1696477433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1696477429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec9882b64620d4449c3a72c69af1243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RequiredItem: {fileID: 0}
 --- !u!1 &1712138320
 GameObject:
   m_ObjectHideFlags: 0

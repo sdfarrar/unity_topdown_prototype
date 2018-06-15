@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerController : MonoBehaviour {
 
 	private IEnumerable<Weapon> weapons;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 
 	public LayerMask Attackables;
 	public LayerMask Interactables;
+	public LayerMask Grabables;
 
 	public int currentWeaponSlot;
 	private int lastWeaponSlot;
@@ -72,7 +74,10 @@ public class PlayerController : MonoBehaviour {
 				State = PlayerState.INTERACT;
 			}else if(LiftObject()){
 				State = PlayerState.CARRY;
+			}else if(Grab()){
+				State = PlayerState.GRAB;
 			}
+		//}else if(PlayerInput.InteractHeldDown && Grab()){
 		}
 	}
 
@@ -95,6 +100,7 @@ public class PlayerController : MonoBehaviour {
 	private void HandleGrabbing(){
 		if(!PlayerInput.InteractHeldDown){
 			State = PlayerState.EMPTY;
+			movement.enabled = true;
 			return;
 		}
 		//TODO do grab things
@@ -136,10 +142,17 @@ public class PlayerController : MonoBehaviour {
 		return true;
 	}
 
+	private bool Grab(){
+		Transform obj = GetClosest<Transform>(InteractablesBuffer, Grabables);
+		if(obj==null){	return false; }
+		movement.enabled = false;
+		return true;
+	}
+
 	private T GetClosest<T>(Collider2D[] buffer, LayerMask layerMask){
 		int count = Physics2D.OverlapBoxNonAlloc(InteractiveArea.transform.position, InteractiveArea.size, 360, buffer, layerMask);
 		ClosestObject<T> closest = new ClosestObject<T>{ angle=360 };
-
+		
 		for(int i=0; i<count; ++i){
 			if(InteractablesBuffer[i]==null){ continue; }
 			Transform found = InteractablesBuffer[i].transform;

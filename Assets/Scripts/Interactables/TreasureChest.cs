@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(BoxCollider2D), typeof(SpriteRenderer))]
 public class TreasureChest : MonoBehaviour, IInteractable {
 
 	public Sprite ClosedImage;
@@ -12,9 +12,11 @@ public class TreasureChest : MonoBehaviour, IInteractable {
 	public GameObject Contents;
 
 	private new SpriteRenderer renderer;
+	private BoxCollider2D Hitbox;
 
 	private void Start(){
 		renderer = GetComponent<SpriteRenderer>();
+		Hitbox = GetComponent<BoxCollider2D>();
 		UpdateSprite();
 	}
 
@@ -24,6 +26,7 @@ public class TreasureChest : MonoBehaviour, IInteractable {
 
 	public bool OnInteract(PlayerController player){
 		if(!closed){ return false; } // already looted
+		if(!CanInteract(player)){ return false; } // not below chest
 
 		Debug.Log(gameObject.name + " was interacted with");
 		closed = false;
@@ -38,4 +41,16 @@ public class TreasureChest : MonoBehaviour, IInteractable {
 		renderer.sprite = (closed) ? ClosedImage : OpenedImage;
 	}
 
+	private bool CanInteract(PlayerController player) {
+		// if player is below the chest, return true
+		return GetPlayerTopPosition(player) < GetBottomPosition();
+	}
+
+	private float GetPlayerTopPosition(PlayerController player){
+		return player.transform.position.y + player.GetSize().y/2;
+	}
+
+	private float GetBottomPosition(){
+		return transform.position.y - Hitbox.size.y/2f;
+	}
 }
