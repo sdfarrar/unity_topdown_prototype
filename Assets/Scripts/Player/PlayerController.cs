@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour {
 		Hitbox = GetComponent<BoxCollider2D>();
 		InteractiveArea = transform.Find("InteractiveArea").GetComponent<BoxCollider2D>();
 		LiftPosition = transform.Find("LiftPosition");
-		ChangeWeapon();
+		//ChangeWeapon();
 	}
 	
 	void Update () {

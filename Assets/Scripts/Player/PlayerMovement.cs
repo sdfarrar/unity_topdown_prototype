@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour {
 	private bool dashing;
 
 	private Vector2 moveVelocity;
+	private Vector2 input;
 	private Rigidbody2D rb;
 	public PlayerInput playerInput;
 
@@ -25,7 +26,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	void Update () {
-		Vector2 input = new Vector2(playerInput.HorizontalRaw, playerInput.VerticalRaw).normalized;
+		input = new Vector2(playerInput.HorizontalRaw, playerInput.VerticalRaw).normalized;
 		moveVelocity = input * speed;
 
 		UpdateDirection();
@@ -50,6 +51,10 @@ public class PlayerMovement : MonoBehaviour {
 
 	public Vector2 GetFacing(){
 		return (direction==0) ? GetDirection(lastDirection) : GetDirection(direction);
+	}
+
+	public Vector2 GetInput(){
+		return input;
 	}
 
 	private Vector2 GetDirection(int dir){
