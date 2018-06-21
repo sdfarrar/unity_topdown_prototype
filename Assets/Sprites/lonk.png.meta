@@ -2,30 +2,30 @@ fileFormatVersion: 2
 guid: 6d42ba98237cff34396ced7aa5dac136
 TextureImporter:
   fileIDToRecycleName:
-    21300000: lonk_0
-    21300002: lonk_1
-    21300004: lonk_2
-    21300006: lonk_3
-    21300008: lonk_4
-    21300010: lonk_5
-    21300012: lonk_6
-    21300014: lonk_7
-    21300016: lonk_8
-    21300018: lonk_9
-    21300020: lonk_10
-    21300022: lonk_11
-    21300024: lonk_12
-    21300026: lonk_13
-    21300028: lonk_14
-    21300030: lonk_15
-    21300032: lonk_16
-    21300034: lonk_17
-    21300036: lonk_18
-    21300038: lonk_19
-    21300040: lonk_20
-    21300042: lonk_21
-    21300044: lonk_22
-    21300046: lonk_23
+    21300000: lonk_walk_up_unequipped_0
+    21300002: lonk_walk_up_unequipped_1
+    21300004: lonk_walk_up_unequipped_2
+    21300006: lonk_walk_up_unequipped_3
+    21300008: lonk_walk_up_unequipped_4
+    21300010: lonk_walk_up_unequipped_5
+    21300012: lonk_walk_up_unequipped_6
+    21300014: lonk_walk_up_unequipped_7
+    21300016: lonk_walk_side_unequipped_8
+    21300018: lonk_walk_side_unequipped_9
+    21300020: lonk_walk_side_unequipped_10
+    21300022: lonk_walk_side_unequipped_11
+    21300024: lonk_walk_side_unequipped_12
+    21300026: lonk_walk_side_unequipped_13
+    21300028: lonk_walk_side_unequipped_14
+    21300030: lonk_walk_side_unequipped_15
+    21300032: lonk_walk_down_unequipped_16
+    21300034: lonk_walk_down_unequipped_17
+    21300036: lonk_walk_down_unequipped_18
+    21300038: lonk_walk_down_unequipped_19
+    21300040: lonk_walk_down_unequipped_20
+    21300042: lonk_walk_down_unequipped_21
+    21300044: lonk_walk_down_unequipped_22
+    21300046: lonk_walk_down_unequipped_23
     21300048: lonk_up_equipped_0
     21300050: lonk_up_equipped_1
     21300052: lonk_up_equipped_2
@@ -172,7 +172,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lonk_0
+      name: lonk_walk_up_unequipped_0
       rect:
         serializedVersion: 2
         x: 1
@@ -192,7 +192,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_1
+      name: lonk_walk_up_unequipped_1
       rect:
         serializedVersion: 2
         x: 34
@@ -212,7 +212,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_2
+      name: lonk_walk_up_unequipped_2
       rect:
         serializedVersion: 2
         x: 67
@@ -232,7 +232,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_3
+      name: lonk_walk_up_unequipped_3
       rect:
         serializedVersion: 2
         x: 100
@@ -252,7 +252,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_4
+      name: lonk_walk_up_unequipped_4
       rect:
         serializedVersion: 2
         x: 133
@@ -272,7 +272,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_5
+      name: lonk_walk_up_unequipped_5
       rect:
         serializedVersion: 2
         x: 166
@@ -292,7 +292,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_6
+      name: lonk_walk_up_unequipped_6
       rect:
         serializedVersion: 2
         x: 199
@@ -312,7 +312,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_7
+      name: lonk_walk_up_unequipped_7
       rect:
         serializedVersion: 2
         x: 232
@@ -332,7 +332,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_8
+      name: lonk_walk_side_unequipped_8
       rect:
         serializedVersion: 2
         x: 1
@@ -352,7 +352,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_9
+      name: lonk_walk_side_unequipped_9
       rect:
         serializedVersion: 2
         x: 34
@@ -372,7 +372,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_10
+      name: lonk_walk_side_unequipped_10
       rect:
         serializedVersion: 2
         x: 67
@@ -392,7 +392,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_11
+      name: lonk_walk_side_unequipped_11
       rect:
         serializedVersion: 2
         x: 100
@@ -412,7 +412,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_12
+      name: lonk_walk_side_unequipped_12
       rect:
         serializedVersion: 2
         x: 133
@@ -432,7 +432,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_13
+      name: lonk_walk_side_unequipped_13
       rect:
         serializedVersion: 2
         x: 166
@@ -452,7 +452,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_14
+      name: lonk_walk_side_unequipped_14
       rect:
         serializedVersion: 2
         x: 199
@@ -472,7 +472,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_15
+      name: lonk_walk_side_unequipped_15
       rect:
         serializedVersion: 2
         x: 232
@@ -492,7 +492,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_16
+      name: lonk_walk_down_unequipped_16
       rect:
         serializedVersion: 2
         x: 1
@@ -512,7 +512,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_17
+      name: lonk_walk_down_unequipped_17
       rect:
         serializedVersion: 2
         x: 34
@@ -532,7 +532,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_18
+      name: lonk_walk_down_unequipped_18
       rect:
         serializedVersion: 2
         x: 67
@@ -552,7 +552,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_19
+      name: lonk_walk_down_unequipped_19
       rect:
         serializedVersion: 2
         x: 100
@@ -572,7 +572,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_20
+      name: lonk_walk_down_unequipped_20
       rect:
         serializedVersion: 2
         x: 133
@@ -592,7 +592,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_21
+      name: lonk_walk_down_unequipped_21
       rect:
         serializedVersion: 2
         x: 166
@@ -612,7 +612,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_22
+      name: lonk_walk_down_unequipped_22
       rect:
         serializedVersion: 2
         x: 199
@@ -632,7 +632,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lonk_23
+      name: lonk_walk_down_unequipped_23
       rect:
         serializedVersion: 2
         x: 232
