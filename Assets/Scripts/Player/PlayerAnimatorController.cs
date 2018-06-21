@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerAnimatorController : MonoBehaviour {
 
 	public PlayerMovement PlayerMovement;
+	public bool PlayerEquipped;
+	private SpriteRenderer _Renderer;
 	private Animator _Animator;
 
 	private AnimState State;
@@ -45,19 +47,22 @@ public class PlayerAnimatorController : MonoBehaviour {
 
 	void Start () {
 		_Animator = GetComponent<Animator>();
+		_Renderer = GetComponent<SpriteRenderer>();
 		State = new AnimState();
 		State.FacingDown = true;
 	}
 	
 	void Update () {
 		UpdateState();		
-		State.UpdateAnimatorParams(_Animator);
+		_Animator.SetLayerWeight(1, PlayerEquipped ? 1 : 0);
+		_Renderer.flipX = !PlayerEquipped && State.FacingLeft;
 	}
 
 	private void UpdateState(){
 		UpdateFacing();
 		UpdateMovement();
 		UpdateActions();
+		State.UpdateAnimatorParams(_Animator);
 	}
 
 	private void UpdateFacing(){
