@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour {
 	private Vector2 direction;
 	private PlayerMovement movement;
 
-	private BoxCollider2D Hitbox;
+	private CircleCollider2D Hitbox;
+	private Vector2 HitboxSize;
 	private BoxCollider2D InteractiveArea;
 
 	private Transform LiftPosition;
@@ -41,7 +42,8 @@ public class PlayerController : MonoBehaviour {
 		direction = Vector2.up;
 		weapons = GetComponentsInChildren<Weapon>();
 		movement = GetComponent<PlayerMovement>();
-		Hitbox = GetComponent<BoxCollider2D>();
+		Hitbox = GetComponent<CircleCollider2D>();
+		HitboxSize = new Vector2(Hitbox.radius, Hitbox.radius);
 		InteractiveArea = transform.Find("InteractiveArea").GetComponent<BoxCollider2D>();
 		LiftPosition = transform.Find("LiftPosition");
 		//ChangeWeapon();
@@ -61,7 +63,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public Vector2 GetSize(){
-		return Hitbox.size;
+		return HitboxSize;
+	}
+
+	public Vector3 GetHitboxPosition(){
+		return Hitbox.transform.position + new Vector3(Hitbox.offset.x, Hitbox.offset.y, 0);
 	}
 
 	public Transform GetLiftTransform(){

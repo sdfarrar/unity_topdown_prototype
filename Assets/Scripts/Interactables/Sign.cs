@@ -23,7 +23,7 @@ public class Sign : LiftableObject, IInteractable {
 	}
 
 	private float GetPlayerTopPosition(PlayerController player){
-		return player.transform.position.y + player.GetSize().y/2;
+		return player.GetHitboxPosition().y + player.GetSize().y/2;
 	}
 
 	private float GetBottomPosition(){

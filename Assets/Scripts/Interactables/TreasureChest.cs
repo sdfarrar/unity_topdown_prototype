@@ -43,11 +43,13 @@ public class TreasureChest : MonoBehaviour, IInteractable {
 
 	private bool CanInteract(PlayerController player) {
 		// if player is below the chest, return true
+		Debug.Log(GetPlayerTopPosition(player) + " < " + GetBottomPosition());
 		return GetPlayerTopPosition(player) < GetBottomPosition();
 	}
 
 	private float GetPlayerTopPosition(PlayerController player){
-		return player.transform.position.y + player.GetSize().y/2;
+		//return player.transform.position.y + player.GetSize().y/2;
+		return player.GetHitboxPosition().y + player.GetSize().y/2;
 	}
 
 	private float GetBottomPosition(){
