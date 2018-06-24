@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject dashEffect;
 	private float elapsedDashTime;
 	private bool dashing;
+	private bool attacking;
 
 	private Vector2 moveVelocity;
 	private Vector2 input;
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if(!dashing){
+		if(!dashing && !attacking){
 			rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
 		}
 	}
@@ -55,6 +56,14 @@ public class PlayerMovement : MonoBehaviour {
 
 	public Vector2 GetInput(){
 		return input;
+	}
+
+	public void OnPlayerAttackStarted(){
+		attacking = true;
+	}
+
+	public void OnPlayerAttackEnded(){
+		attacking = false;
 	}
 
 	private Vector2 GetDirection(int dir){

@@ -12672,6 +12672,16 @@ Prefab:
       propertyPath: DamageableTags.UseConstant
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 212149563203201776, guid: e081235313fd9484f82400c7bd23b2cc,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -1060396473
+      objectReference: {fileID: 0}
+    - target: {fileID: 212149563203201776, guid: e081235313fd9484f82400c7bd23b2cc,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e081235313fd9484f82400c7bd23b2cc, type: 2}
   m_IsPrefabAsset: 0
@@ -13082,6 +13092,8 @@ GameObject:
   - component: {fileID: 1147728040}
   - component: {fileID: 1147728042}
   - component: {fileID: 1147728041}
+  - component: {fileID: 1147728044}
+  - component: {fileID: 1147728039}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -13097,7 +13109,7 @@ Transform:
   m_GameObject: {fileID: 1147728035}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.67, y: -0.04, z: 0}
-  m_LocalScale: {x: 0.99, y: 0.99, z: 0.99}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1289421752}
   - {fileID: 247445938}
@@ -13142,6 +13154,34 @@ MonoBehaviour:
   dashTime: 0.1
   dashEffect: {fileID: 1844731348692496, guid: 0d241215501ea0f4cbcb19cb7c4d795b, type: 2}
   playerInput: {fileID: 11400000, guid: 57e264c1a9e91ad44a0217b197336356, type: 2}
+--- !u!114 &1147728039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1147728035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c922ec97ee3a0c48ad0823b6e1e9c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: fbf70f64134ef7443ad74b823fb3413c, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1147728038}
+        m_MethodName: OnPlayerAttackStarted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &1147728040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13253,6 +13293,34 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.25}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!114 &1147728044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1147728035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c922ec97ee3a0c48ad0823b6e1e9c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0eb39d611c57f9140b9761e4964fa81d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1147728038}
+        m_MethodName: OnPlayerAttackEnded
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1172438942
 GameObject:
   m_ObjectHideFlags: 0
@@ -13512,6 +13580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerMovement: {fileID: 1147728038}
+  PlayerEquipped: 0
 --- !u!1 &1399175075
 GameObject:
   m_ObjectHideFlags: 3

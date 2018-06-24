@@ -81,7 +81,7 @@ public class PlayerAnimatorController : MonoBehaviour {
 	}
 
 	private void UpdateActions(){
-		State.Attacking = PlayerMovement.playerInput.AttackPressed;
+		State.Attacking = PlayerEquipped && PlayerMovement.playerInput.AttackPressed;
 	}
 
 
