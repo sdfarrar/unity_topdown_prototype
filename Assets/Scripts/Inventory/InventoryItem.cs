@@ -7,5 +7,4 @@ public class InventoryItem : ScriptableObject {
 	[ReadOnlyInEditor]
 	public string GUID;
 	public Sprite Icon;
-	public bool Acquired;
 }

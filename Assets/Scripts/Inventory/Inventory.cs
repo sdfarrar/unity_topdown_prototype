@@ -7,6 +7,7 @@ using UnityEngine.Events;
 [CreateAssetMenu(menuName="Inventory/Inventory")]
 public class Inventory : ScriptableObject {
 
+	public Wallet Wallet;
 	public InventoryItem[] Items = new InventoryItem[0];
 	public Serializer Serializer;
 	public InventoryState InventoryState;
