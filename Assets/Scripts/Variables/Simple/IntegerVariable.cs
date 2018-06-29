@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[CreateAssetMenu(menuName="Variables/Integer")]
 public class IntegerVariable : Variable<int> {
 
     public override void ApplyChange(int change) { Value += change; }

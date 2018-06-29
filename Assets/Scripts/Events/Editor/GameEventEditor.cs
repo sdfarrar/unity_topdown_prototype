@@ -11,7 +11,9 @@ public class GameEventEditor : Editor {
 
 		if(GUILayout.Button("Raise")){ 
 			GameEvent ev = target as GameEvent;
-			ev.VariableToTest.ApplyChange(ev.Amount);
+			if(ev.VariableToTest!=null){
+				ev.VariableToTest.ApplyChange(ev.Amount);
+			}
 			ev.Raise(); 
 		}
 	}
