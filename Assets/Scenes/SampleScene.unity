@@ -13194,6 +13194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerInput: {fileID: 11400000, guid: 57e264c1a9e91ad44a0217b197336356, type: 2}
+  PlayerInventory: {fileID: 11400000, guid: ebc8421b537767e46b1b9516ace266cd, type: 2}
   Attackables:
     serializedVersion: 2
     m_Bits: 32768

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1492eb4dca5a3842bac950552af5304, type: 3}
-  m_Name: MaxWalletAmount
+  m_Name: WalletAmountMax
   m_EditorClassIdentifier: 
   Description: 
   Value: 100

@@ -11,9 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa58ba703f2bee04c8c70d8751edb3e8, type: 3}
   m_Name: PlayerWallet
   m_EditorClassIdentifier: 
-  CurrentAmount: {fileID: 0}
+  CurrentAmount: {fileID: 11400000, guid: e8023f95483077b4da47a59228684e16, type: 2}
   MaxAmount:
-    UseConstant: 1
+    UseConstant: 0
     ConstantValue: 0
-    Variable: {fileID: 0}
-  ResetAmount: 0
+    Variable: {fileID: 11400000, guid: d99314e8525f1e04491a45b7db49b773, type: 2}
