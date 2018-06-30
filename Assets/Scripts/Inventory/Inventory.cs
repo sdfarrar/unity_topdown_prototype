@@ -71,6 +71,26 @@ public class Inventory : ScriptableObject {
 			UnityEditor.EditorUtility.SetDirty(this);
 		}
 	}
+
+	[ContextMenu("Add Random Item")]
+	private void AddRandomItem() {
+		int index = Random.Range(0, Items.Length);
+		InventoryItem item = Items[index];
+		Debug.Log("Adding: " + item.name);
+		AddItem(item);
+	}
+
+	[ContextMenu("Save")]
+	private void SaveFromEditor(){ Save(); }
+	[ContextMenu("Load")]
+	private void LoadFromEditor(){ Load(); }
+	[ContextMenu("Clear")]
+	private void ClearState(){
+		foreach (var item in Items) {
+			InventoryState.Remove(item);
+		}
+	}
+
 #endif
 	
 }

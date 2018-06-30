@@ -14,7 +14,7 @@ public class Roople : MonoBehaviour, ICollectable {
 		GetComponent<SpriteRenderer>().sprite = template.sprite;
 	}
 	
-	public void OnCollect(){
+	public void OnCollect(Inventory inventory){
 		Destroy(this.gameObject);
 	}
 

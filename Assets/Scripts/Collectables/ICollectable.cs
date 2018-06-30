@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface ICollectable {
 
-	void OnCollect();
+	void OnCollect(Inventory inventory);
 
 }

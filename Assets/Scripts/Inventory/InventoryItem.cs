@@ -6,5 +6,8 @@ using UnityEngine;
 public class InventoryItem : ScriptableObject {
 	[ReadOnlyInEditor]
 	public string GUID;
-	public Sprite Icon;
+	public bool hasQuantity;
+	public IntegerReference Quantity;
+	public IntegerReference Max;
+	public Sprite Sprite;
 }

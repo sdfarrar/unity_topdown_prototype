@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
 public class Collector : MonoBehaviour {
 
+	public Inventory Inventory;
+
 	/// <summary>
 	/// Sent when another object enters a trigger collider attached to this
 	/// object (2D physics only).
@@ -12,7 +14,7 @@ public class Collector : MonoBehaviour {
 	/// <param name="other">The other Collider2D involved in this collision.</param>
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.tag=="Collectable"){
-			other.gameObject.GetComponent<ICollectable>().OnCollect();
+			other.gameObject.GetComponent<ICollectable>().OnCollect(Inventory);
 		}
 	}
 	

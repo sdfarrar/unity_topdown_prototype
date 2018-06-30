@@ -45,5 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91107f71c9eadcf46a97a3a1d76b8415, type: 3}
   m_Name: InventoryState
   m_EditorClassIdentifier: 
-  OwnedGUIDS: []
-  OwnedItem: []
+  OwnedGUIDS:
+  - 6445d9c1d8dd24544bcec373c87b09ff
+  OwnedItem:
+  - {fileID: 11400000, guid: 6445d9c1d8dd24544bcec373c87b09ff, type: 2}
