@@ -19,3 +19,19 @@ public class GameEventEditor : Editor {
 	}
 
 }
+
+[CustomEditor(typeof(IntegerGameEvent))]
+public class IntegerGameEventEditor : Editor {
+
+	public override void OnInspectorGUI() {
+		base.OnInspectorGUI();
+
+		GUI.enabled = Application.isPlaying;
+
+		if(GUILayout.Button("Raise")){ 
+			IntegerGameEvent ev = target as IntegerGameEvent;
+			ev.Raise(); 
+		}
+	}
+
+}
