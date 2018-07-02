@@ -27,6 +27,11 @@ public class InventoryState : ScriptableObject {
 		return result;
 	}
 
+	//public void Add(InventoryItem item, int quantity){
+	//	item.ApplyChange(quantity);
+	//	this.Add(item);
+	//}
+
 	public bool Remove(InventoryItem item){
 		bool result = set.Remove(item.GUID);
 		if(result){
@@ -35,4 +40,9 @@ public class InventoryState : ScriptableObject {
 		}
 		return result;
 	}
+
+	//public void Remove(InventoryItem item, int quantity){
+	//	item.ApplyChange(quantity);
+	//	this.Remove(item);
+	//}
 }

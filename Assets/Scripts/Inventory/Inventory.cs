@@ -41,8 +41,19 @@ public class Inventory : ScriptableObject {
 		if(InventoryState.Add(item)){ OnInventoryChanged.Invoke(); }
 	}
 
+	public void AddItem(InventoryItem item, int quantity){
+		item.ApplyChange(quantity);
+		InventoryState.Add(item);
+		OnInventoryChanged.Invoke();
+	}
+
 	public void RemoveItem(InventoryItem item) {
 		if(InventoryState.Remove(item)){ OnInventoryChanged.Invoke(); }
+	}
+
+	public void RemoveItem(InventoryItem item, int quantity){
+		item.ApplyChange(quantity);
+		OnInventoryChanged.Invoke();
 	}
 
 #if UNITY_EDITOR

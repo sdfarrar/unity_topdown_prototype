@@ -12,13 +12,10 @@ MonoBehaviour:
   m_Name: Bomb
   m_EditorClassIdentifier: 
   GUID: 6445d9c1d8dd24544bcec373c87b09ff
-  hasQuantity: 0
-  Quantity:
-    UseConstant: 1
-    ConstantValue: 0
-    Variable: {fileID: 0}
+  Unique: 0
+  Quantity: {fileID: 11400000, guid: 78b43436081af914087c73365cfd318d, type: 2}
   Max:
-    UseConstant: 1
+    UseConstant: 0
     ConstantValue: 0
-    Variable: {fileID: 0}
+    Variable: {fileID: 11400000, guid: ce186be9518b00c4bbcddef8a4fbc5c1, type: 2}
   Sprite: {fileID: 21300000, guid: 704071e10e9accc49bcc1694c3be7252, type: 3}

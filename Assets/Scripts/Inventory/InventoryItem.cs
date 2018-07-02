@@ -6,8 +6,13 @@ using UnityEngine;
 public class InventoryItem : ScriptableObject {
 	[ReadOnlyInEditor]
 	public string GUID;
-	public bool hasQuantity;
-	public IntegerReference Quantity;
+	public bool Unique;
+	public int Quantity;
 	public IntegerReference Max;
 	public Sprite Sprite;
+
+	public void ApplyChange(int value){
+		int amount = Mathf.Clamp(Quantity+value, 0, Max.Value);
+		Quantity = amount;
+	}
 }
