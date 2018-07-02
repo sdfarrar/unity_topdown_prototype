@@ -14,7 +14,9 @@ public class Collector : MonoBehaviour {
 	/// <param name="other">The other Collider2D involved in this collision.</param>
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.tag=="Collectable"){
-			other.gameObject.GetComponent<ICollectable>().OnCollect(Inventory);
+			ICollectable collectable = other.gameObject.GetComponent<ICollectable>();
+			if(collectable==null){ return; }
+			collectable.OnCollect(Inventory);
 		}
 	}
 	

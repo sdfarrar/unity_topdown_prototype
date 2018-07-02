@@ -5,12 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName="Inventory/Wallet")]
 public class Wallet : ScriptableObject {
 
-	public IntegerVariable CurrentAmount;
+	public int CurrentAmount;
 	public IntegerReference MaxAmount;
 
 	public void ApplyChange(int delta){
-		int value = Mathf.Clamp(CurrentAmount.Value+delta, 0, MaxAmount.Value);
-		CurrentAmount.SetValue(value);
+		int value = Mathf.Clamp(CurrentAmount+delta, 0, MaxAmount.Value);
+		CurrentAmount = value;
 	}
 
 }

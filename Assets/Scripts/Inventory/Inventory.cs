@@ -56,6 +56,16 @@ public class Inventory : ScriptableObject {
 		OnInventoryChanged.Invoke();
 	}
 
+	public void ApplyChangeToWallet(int value){
+		Wallet.ApplyChange(value);
+	}
+
+	public void Reset(){
+		Wallet.CurrentAmount = 0;
+		Items = new InventoryItem[0];
+		m_guidToItem.Clear();
+	}
+
 #if UNITY_EDITOR
 
 	private void OnValidate() {

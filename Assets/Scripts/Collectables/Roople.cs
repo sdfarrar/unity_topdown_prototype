@@ -9,12 +9,16 @@ public class Roople : MonoBehaviour, ICollectable {
 
 	private int value;
 
+	private void OnEnable(){
+		GetComponent<SpriteRenderer>().sprite = template.sprite;
+	}
+
 	void Start () {
 		value = template.value;
-		GetComponent<SpriteRenderer>().sprite = template.sprite;
 	}
 	
 	public void OnCollect(Inventory inventory){
+		inventory.ApplyChangeToWallet(value);
 		Destroy(this.gameObject);
 	}
 
