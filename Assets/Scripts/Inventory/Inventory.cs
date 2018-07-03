@@ -58,12 +58,14 @@ public class Inventory : ScriptableObject {
 
 	public void ApplyChangeToWallet(int value){
 		Wallet.ApplyChange(value);
+		OnInventoryChanged.Invoke();
 	}
 
 	public void Reset(){
 		Wallet.CurrentAmount = 0;
 		Items = new InventoryItem[0];
 		m_guidToItem.Clear();
+		OnInventoryChanged.Invoke();
 	}
 
 #if UNITY_EDITOR

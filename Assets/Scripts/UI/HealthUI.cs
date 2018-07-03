@@ -16,10 +16,6 @@ public class HealthUI : MonoBehaviour {
 	private void Start(){
 		Image[] images = GetComponentsInChildren<Image>();
 		hearts = new List<Image>(images);
-		//Debug.Log("current hearts: " + hearts.Count);
-		//foreach (var image in hearts){
-		//	Debug.Log(image.name);
-		//}
 	}
 
 	public void OnHealthDamaged(){

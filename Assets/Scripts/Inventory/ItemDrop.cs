@@ -7,6 +7,5 @@ public class ItemDrop : ScriptableObject {
 
 	public InventoryItem Item;
 	public IntegerReference Quantity;
-	public FloatReference DropChance;
 
 }
