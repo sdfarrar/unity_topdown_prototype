@@ -6,6 +6,10 @@ using UnityEngine;
 public class InventoryResetter : MonoBehaviour {
 
 	public Inventory Inventory;
+	public IntegerVariable PlayerMagic;
+
+	[Range(0, 100)]
+	public int MagicResetValue;
 
 	private void Awake(){
 		GetComponent<BoxCollider2D>().isTrigger = true;
@@ -14,6 +18,7 @@ public class InventoryResetter : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D other)	{
 		if(other.CompareTag("Player")){
 			Inventory.Reset();
+			PlayerMagic.SetValue(MagicResetValue);
 		}
 	}
 }

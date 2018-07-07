@@ -9,21 +9,25 @@ public class MagicMeter : MonoBehaviour {
 	public Image SolidImage;
 	public Image TopImage;
 
+	public IntegerVariable MagicAmount;
+	public IntegerVariable MagicAmountMax;
+
 	private float maxPositionY = 67f;
 	private float minPositionY = -65f;
-	private float distanceBetweenPositions; 
 
-	void Start () {
-		distanceBetweenPositions = Mathf.Abs(maxPositionY) + Mathf.Abs(minPositionY);
+	private void Start(){
+		UpdateMeter();
 	}
-	
-	//TODO Move to eventlistener callback
-	void Update () {
-		if(SolidImage==null || TopImage==null){ return; }
-		//TODO set SolidImage.fillAmount == magic percentage
-		float fillAmount = SolidImage.fillAmount;
-		distanceBetweenPositions = Mathf.Abs(maxPositionY) + Mathf.Abs(minPositionY); //TODO remove
-		float displacement = minPositionY + (distanceBetweenPositions*fillAmount);
+
+	public void OnMagicAmountChanged(){
+		UpdateMeter();
+	}
+
+	private void UpdateMeter(){
+		if(SolidImage==null || TopImage==null){ Debug.LogWarning("Image reference(s) == null!"); return; }
+		float percentage = SolidImage.fillAmount = (float)MagicAmount.Value / (float)MagicAmountMax.Value;
+
+		float displacement = Mathf.Lerp(minPositionY, maxPositionY, percentage);
 		Vector3 topPosition = TopImage.transform.localPosition;
 		TopImage.transform.localPosition = new Vector3(topPosition.x, displacement, topPosition.z);
 	}

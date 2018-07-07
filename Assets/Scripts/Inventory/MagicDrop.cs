@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName="Drops/Item")]
-public class ItemDrop : ScriptableObject {
-
-	public InventoryItem Item;
+[CreateAssetMenu(menuName="Drops/Magic")]
+public class MagicDrop : ScriptableObject {
+	public Sprite Sprite;
 	public IntegerReference Quantity;
-
 }
