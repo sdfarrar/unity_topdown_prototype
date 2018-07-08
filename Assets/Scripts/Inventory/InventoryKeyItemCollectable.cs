@@ -4,9 +4,10 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(SpriteRenderer), typeof(Collider2D))]
-public class InventoryItemCollectable : MonoBehaviour, ICollectable {
+public class InventoryKeyItemCollectable : MonoBehaviour, ICollectable {
 
 	public ItemDrop Drop;
+	public int InitialCount;
 	
 	private new SpriteRenderer renderer;
 
@@ -17,9 +18,7 @@ public class InventoryItemCollectable : MonoBehaviour, ICollectable {
 	}
 
     public void OnCollect(Inventory inventory) {
-		if(inventory.UpdateItemQuantity(Drop.Item, Drop.Quantity.Value)){
-			Destroy(this.gameObject);
-		}
+		inventory.AddItem(Drop.Item, InitialCount);
+		Destroy(this.gameObject);
     }
-
 }

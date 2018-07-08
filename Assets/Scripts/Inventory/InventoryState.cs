@@ -41,6 +41,12 @@ public class InventoryState : ScriptableObject {
 		return result;
 	}
 
+	public void Reset(){
+		OwnedGUIDS.Clear();
+		OwnedItem.Clear();
+		set.Clear();
+	}
+
 	//public void Remove(InventoryItem item, int quantity){
 	//	item.ApplyChange(quantity);
 	//	this.Remove(item);

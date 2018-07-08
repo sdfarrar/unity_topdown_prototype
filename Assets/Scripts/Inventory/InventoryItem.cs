@@ -11,7 +11,7 @@ public class InventoryItem : ScriptableObject {
 	public IntegerReference Max;
 	public Sprite Sprite;
 
-	public void ApplyChange(int value){
+	public void ApplyChangeToQuantity(int value){
 		int amount = Mathf.Clamp(Quantity+value, 0, Max.Value);
 		Quantity = amount;
 	}

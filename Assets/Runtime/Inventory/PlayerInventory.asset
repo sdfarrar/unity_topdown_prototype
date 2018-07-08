@@ -34,6 +34,11 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  OnNewItemAdded:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114257226901467052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,7 +50,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91107f71c9eadcf46a97a3a1d76b8415, type: 3}
   m_Name: InventoryState
   m_EditorClassIdentifier: 
-  OwnedGUIDS:
-  - 6445d9c1d8dd24544bcec373c87b09ff
-  OwnedItem:
-  - {fileID: 11400000, guid: 6445d9c1d8dd24544bcec373c87b09ff, type: 2}
+  OwnedGUIDS: []
+  OwnedItem: []

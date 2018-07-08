@@ -12,6 +12,7 @@ public class Inventory : ScriptableObject {
 	public Serializer Serializer;
 	public InventoryState InventoryState;
 	public UnityEvent OnInventoryChanged;
+	public UnityEvent OnNewItemAdded;
 
 	private Dictionary<string, InventoryItem> m_guidToItem = new Dictionary<string, InventoryItem>();
 	
@@ -37,24 +38,32 @@ public class Inventory : ScriptableObject {
 		OnInventoryChanged.Invoke();
 	}
 
+	// Adds new item to iventory
 	public void AddItem(InventoryItem item) {
-		if(InventoryState.Add(item)){ OnInventoryChanged.Invoke(); }
+		if(InventoryState.Add(item)){ OnNewItemAdded.Invoke(); }
 	}
 
-	public void AddItem(InventoryItem item, int quantity){
-		item.ApplyChange(quantity);
-		InventoryState.Add(item);
+	public void AddItem(InventoryItem item, int initialCount){
+		AddItem(item);
+		UpdateItemQuantity(item ,initialCount);
+	}
+
+	// Updates existing items count in inventory
+	public bool UpdateItemQuantity(InventoryItem item, int delta){
+		if(!HasItem(item)){ Debug.LogWarning("Cannot update item... item is not in inventory!"); return false; }
+		item.ApplyChangeToQuantity(delta);
 		OnInventoryChanged.Invoke();
+		return true;
 	}
 
 	public void RemoveItem(InventoryItem item) {
 		if(InventoryState.Remove(item)){ OnInventoryChanged.Invoke(); }
 	}
 
-	public void RemoveItem(InventoryItem item, int quantity){
-		item.ApplyChange(quantity);
-		OnInventoryChanged.Invoke();
-	}
+	//public void RemoveItem(InventoryItem item, int quantity){
+	//	item.ApplyChangeToQuantity(quantity);
+	//	OnInventoryChanged.Invoke();
+	//}
 
 	public void ApplyChangeToWallet(int value){
 		Wallet.ApplyChange(value);
@@ -63,9 +72,13 @@ public class Inventory : ScriptableObject {
 
 	public void Reset(){
 		Wallet.CurrentAmount = 0;
-		Items = new InventoryItem[0];
-		m_guidToItem.Clear();
+		foreach (var item in Items){ item.Quantity = 0; }
+		InventoryState.Reset();
 		OnInventoryChanged.Invoke();
+	}
+
+	private bool HasItem(InventoryItem item){
+		return InventoryState.set.Contains(item.GUID);
 	}
 
 #if UNITY_EDITOR
