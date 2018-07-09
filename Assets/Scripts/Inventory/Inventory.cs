@@ -50,7 +50,7 @@ public class Inventory : ScriptableObject {
 
 	// Updates existing items count in inventory
 	public bool UpdateItemQuantity(InventoryItem item, int delta){
-		if(!HasItem(item)){ Debug.LogWarning("Cannot update item... item is not in inventory!"); return false; }
+		if(!HasItem(item)){ Debug.LogWarning("Cannot update item... item is not in inventory!"); return false; } //TODO actual game should prevent this event
 		item.ApplyChangeToQuantity(delta);
 		OnInventoryChanged.Invoke();
 		return true;

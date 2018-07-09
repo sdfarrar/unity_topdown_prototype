@@ -9,7 +9,7 @@ public class TreasureChest : MonoBehaviour, IInteractable {
 	public Sprite OpenedImage;
 	public bool closed = true;
 
-	public GameObject Contents;
+	public TreasureChestContents Contents;
 
 	private new SpriteRenderer renderer;
 	private BoxCollider2D Hitbox;
@@ -28,11 +28,13 @@ public class TreasureChest : MonoBehaviour, IInteractable {
 		if(!closed){ return false; } // already looted
 		if(!CanInteract(player)){ return false; } // not below chest
 
-		Debug.Log(gameObject.name + " was interacted with");
 		closed = false;
 		UpdateSprite();
-		//TODO attempt to add contents to player
-		//if player cannot hold, reset to closed
+		AddItemToInventory(player.PlayerInventory);
+		if(!Contents.Text.Equals("")){
+			//TODO do ui text stuff
+			Debug.Log("TreasureChest text: " + Contents.Text);
+		}
 		return true;
 	}
 
@@ -41,14 +43,21 @@ public class TreasureChest : MonoBehaviour, IInteractable {
 		renderer.sprite = (closed) ? ClosedImage : OpenedImage;
 	}
 
+	private void AddItemToInventory(Inventory inventory){
+		if(Contents.IsKeyItem){
+			inventory.AddItem(Contents.Drop.Item, Contents.InitialCount);
+		}else{
+			//Ignores whether contents cannot be fully added to inventory and ignore excess
+			inventory.UpdateItemQuantity(Contents.Drop.Item, Contents.Drop.Quantity);
+		}
+	}
+
+	// if player is below the chest, return true
 	private bool CanInteract(PlayerController player) {
-		// if player is below the chest, return true
-		Debug.Log(GetPlayerTopPosition(player) + " < " + GetBottomPosition());
 		return GetPlayerTopPosition(player) < GetBottomPosition();
 	}
 
 	private float GetPlayerTopPosition(PlayerController player){
-		//return player.transform.position.y + player.GetSize().y/2;
 		return player.GetHitboxPosition().y + player.GetSize().y/2;
 	}
 
