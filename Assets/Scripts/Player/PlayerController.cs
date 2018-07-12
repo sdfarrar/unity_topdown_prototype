@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
 	public PlayerInput PlayerInput;
 	//TODO we need to listen for OnPlayerCollected event so we can change the inventory
 	// the collector script on the Player should raise this event when an item is collected
-	public Inventory PlayerInventory;
+	public InventoryV2 PlayerInventory;
 
 	public LayerMask Attackables;
 	public LayerMask Interactables;

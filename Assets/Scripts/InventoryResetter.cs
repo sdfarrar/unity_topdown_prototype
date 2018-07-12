@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class InventoryResetter : MonoBehaviour {
 
-	public Inventory Inventory;
+	public InventoryV2 Inventory;
 	public IntegerVariable PlayerMagic;
 
 	[Range(0, 100)]

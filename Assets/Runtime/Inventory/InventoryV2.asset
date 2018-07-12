@@ -11,15 +11,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 986276ab4ebe23c44b2f5ca41eca5da0, type: 3}
   m_Name: InventoryV2
   m_EditorClassIdentifier: 
-  Serializer: {fileID: 0}
-  Wallet: {fileID: 0}
-  Items:
-  - {fileID: 11400000, guid: 6445d9c1d8dd24544bcec373c87b09ff, type: 2}
-  - {fileID: 11400000, guid: d9f283269854abd4294964285f00dcad, type: 2}
-  - {fileID: 11400000, guid: 47a8ef483fb13c24d98722495721b823, type: 2}
+  Serializer: {fileID: 11400000, guid: d3d93659995b0bc4fb93c7638d3d1cac, type: 2}
+  Wallet: {fileID: 11400000, guid: 862f17b837e75384ba0a841660b9e785, type: 2}
+  Bombs:
+    Item: {fileID: 11400000, guid: 6445d9c1d8dd24544bcec373c87b09ff, type: 2}
+    Count: {fileID: 11400000, guid: 78b43436081af914087c73365cfd318d, type: 2}
+    Max:
+      UseConstant: 0
+      ConstantValue: 0
+      Variable: {fileID: 11400000, guid: ce186be9518b00c4bbcddef8a4fbc5c1, type: 2}
+  Arrows:
+    Item: {fileID: 0}
+    Count: {fileID: 0}
+    Max:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
   OnInventoryChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 61ed8e546a7709048bb4ef5b2ceab2bf, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnNewItemAdded:

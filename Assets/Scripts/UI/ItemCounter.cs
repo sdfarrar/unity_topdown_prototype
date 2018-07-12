@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class ItemCounter : AbstractCounter {
 
-	public InventoryItem Item;
+	public IntegerVariable Count;
 
     protected override void UpdateText() {
-		CountText.text = Item.Quantity < 10 ? "0"+Item.Quantity : ""+Item.Quantity;
+		CountText.text = Count.Value < 10 ? "0"+Count.Value : ""+Count.Value;
     }
 }

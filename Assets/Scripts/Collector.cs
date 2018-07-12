@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
 public class Collector : MonoBehaviour {
 
-	public Inventory Inventory;
+	public InventoryV2 Inventory;
 
 	/// <summary>
 	/// Sent when another object enters a trigger collider attached to this

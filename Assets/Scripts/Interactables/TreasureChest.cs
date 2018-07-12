@@ -43,7 +43,7 @@ public class TreasureChest : MonoBehaviour, IInteractable {
 		renderer.sprite = (closed) ? ClosedImage : OpenedImage;
 	}
 
-	private void AddItemToInventory(Inventory inventory){
+	private void AddItemToInventory(InventoryV2 inventory){
 		if(Contents.IsKeyItem){
 			inventory.AddItem(Contents.Drop.Item, Contents.InitialCount);
 		}else{

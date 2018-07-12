@@ -17,7 +17,7 @@ public class Roople : MonoBehaviour, ICollectable {
 		value = template.value;
 	}
 	
-	public void OnCollect(Inventory inventory){
+	public void OnCollect(InventoryV2 inventory){
 		inventory.ApplyChangeToWallet(value);
 		Destroy(this.gameObject);
 	}

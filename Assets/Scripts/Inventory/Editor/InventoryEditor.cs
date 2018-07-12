@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Inventory))]
+[CustomEditor(typeof(InventoryV2))]
 public class InventoryEditor : Editor {
 
 	public override void OnInspectorGUI(){
 		DrawDefaultInspector();
-		Inventory inventory = (Inventory)target;
+		InventoryV2 inventory = (InventoryV2)target;
 
 		// Draw slots ourselves?
 	}

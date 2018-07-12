@@ -10,9 +10,10 @@ public class InventoryV2 : ScriptableObject {
 	public Serializer Serializer;
 	
 	public Wallet Wallet;
-	public InventoryItem[] Items;
-	//public InventoryItem Bombs;
-	//public InventoryItem Arrows;
+	//public InventoryItem[] Items;
+
+	public InventorySlot Bombs;
+	public InventorySlot Arrows;
 
 	public UnityEvent OnInventoryChanged;
 	public UnityEvent OnNewItemAdded;
@@ -29,32 +30,55 @@ public class InventoryV2 : ScriptableObject {
 		OnInventoryChanged.Invoke();
 	}
 
+	public bool AddItem(InventoryItem item, int initialCount){
+		return true;
+	}
+
+	public bool UpdateItemQuantity(InventoryItem item, int count){
+		return true;
+	}
+
+	public bool ApplyChangeToWallet(int delta){
+		return true;
+
+	}
+
+	public void ApplyBombCountChange(int quantity){
+		Bombs.ApplyChangeToCount(quantity);
+		OnInventoryChanged.Invoke();
+	}
+
+	public void Reset(){
+		Bombs.Count.SetValue(0);
+		OnInventoryChanged.Invoke();
+	}
+
 #if UNITY_EDITOR
 
-	private void OnValidate() {
-		FindItems();
-		InventoryStateV2 state = UnityEditor.AssetDatabase.LoadAssetAtPath<InventoryStateV2>(UnityEditor.AssetDatabase.GetAssetPath(this));
-		if(state==null) {
-			state = ScriptableObject.CreateInstance<InventoryStateV2>();
-			state.name = "InventoryState";
-			UnityEditor.AssetDatabase.AddObjectToAsset(state, this);
-			UnityEditor.AssetDatabase.SaveAssets();
-		}
-		InventoryState = state;
-	}
+	//private void OnValidate() {
+	//	FindItems();
+	//	InventoryStateV2 state = UnityEditor.AssetDatabase.LoadAssetAtPath<InventoryStateV2>(UnityEditor.AssetDatabase.GetAssetPath(this));
+	//	if(state==null) {
+	//		state = ScriptableObject.CreateInstance<InventoryStateV2>();
+	//		state.name = "InventoryState";
+	//		UnityEditor.AssetDatabase.AddObjectToAsset(state, this);
+	//		UnityEditor.AssetDatabase.SaveAssets();
+	//	}
+	//	InventoryState = state;
+	//}
 
-	[ContextMenu("Populate Items")]
-	private void FindItems() {
-		string[] guids = UnityEditor.AssetDatabase.FindAssets("t:" + typeof(InventoryItem).Name);
-		Items = new InventoryItem[guids.Length];
-		for(int i=0; i<guids.Length; ++i){
-			string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guids[i]);
-			InventoryItem item = UnityEditor.AssetDatabase.LoadAssetAtPath<InventoryItem>(path);
-			Items[i] = item;
-			item.GUID = guids[i];
-			UnityEditor.EditorUtility.SetDirty(this);
-		}
-	}
+	//[ContextMenu("Populate Items")]
+	//private void FindItems() {
+	//	string[] guids = UnityEditor.AssetDatabase.FindAssets("t:" + typeof(InventoryItem).Name);
+	//	Items = new InventoryItem[guids.Length];
+	//	for(int i=0; i<guids.Length; ++i){
+	//		string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guids[i]);
+	//		InventoryItem item = UnityEditor.AssetDatabase.LoadAssetAtPath<InventoryItem>(path);
+	//		Items[i] = item;
+	//		item.GUID = guids[i];
+	//		UnityEditor.EditorUtility.SetDirty(this);
+	//	}
+	//}
 
 	//[ContextMenu("Add Random Item")]
 	//private void AddRandomItem() {
@@ -76,4 +100,16 @@ public class InventoryV2 : ScriptableObject {
 	//}
 
 #endif
+}
+
+[System.Serializable]
+public struct InventorySlot {
+	public InventoryItem Item;
+	public IntegerVariable Count;
+	public IntegerReference Max;
+
+	public void ApplyChangeToCount(int value){
+		int amount = Mathf.Clamp(Count.Value+value, 0, Max.Value);
+		Count.SetValue(amount);
+	}
 }
