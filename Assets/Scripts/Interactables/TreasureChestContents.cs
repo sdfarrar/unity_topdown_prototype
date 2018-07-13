@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName="Drops/Chest Contents")]
 public class TreasureChestContents : ScriptableObject {
 
-	public ItemDrop Drop;
+	public ItemDropTemplate Drop;
 	public int InitialCount;
 	public bool IsKeyItem;
 	public string Text;

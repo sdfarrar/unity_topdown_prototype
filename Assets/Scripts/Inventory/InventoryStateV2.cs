@@ -7,5 +7,5 @@ public class InventoryStateV2 : ScriptableObject {
 	public string HERLP;
 
 	// For quick access of inventory items
-	private Dictionary<string, InventoryItem> guidToItemMap = new Dictionary<string, InventoryItem>();
+	private Dictionary<string, Item> guidToItemMap = new Dictionary<string, Item>();
 }

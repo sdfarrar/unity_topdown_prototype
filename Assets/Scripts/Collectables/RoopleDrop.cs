@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 
-public class BombDrop : AbstractItemDrop {
+public class RoopleDrop : AbstractItemDrop {
 
     public override void OnCollect(InventoryV2 inventory) {
-		inventory.ApplyBombCountChange(Drop.Quantity);
+		Debug.Log("OnCollect");
+		inventory.ApplyChangeToWallet(Drop.Quantity);
 		Destroy(this.gameObject);
     }
 

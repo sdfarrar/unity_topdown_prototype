@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer), typeof(Collider2D))]
 public class InventoryKeyItemCollectable : MonoBehaviour, ICollectable {
 
-	public ItemDrop Drop;
+	public ItemDropTemplate Drop;
 	public int InitialCount;
 	
 	private new SpriteRenderer renderer;

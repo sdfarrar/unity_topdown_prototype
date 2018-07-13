@@ -30,17 +30,20 @@ public class InventoryV2 : ScriptableObject {
 		OnInventoryChanged.Invoke();
 	}
 
-	public bool AddItem(InventoryItem item, int initialCount){
+	public bool AddItem(Item item, int initialCount){
+		OnInventoryChanged.Invoke();
 		return true;
 	}
 
-	public bool UpdateItemQuantity(InventoryItem item, int count){
+	public bool UpdateItemQuantity(Item item, int count){
+		OnInventoryChanged.Invoke();
 		return true;
 	}
 
 	public bool ApplyChangeToWallet(int delta){
+		Wallet.ApplyChange(delta);
+		OnInventoryChanged.Invoke();
 		return true;
-
 	}
 
 	public void ApplyBombCountChange(int quantity){
@@ -50,6 +53,7 @@ public class InventoryV2 : ScriptableObject {
 
 	public void Reset(){
 		Bombs.Count.SetValue(0);
+		Wallet.CurrentAmount = 0;
 		OnInventoryChanged.Invoke();
 	}
 
@@ -104,7 +108,7 @@ public class InventoryV2 : ScriptableObject {
 
 [System.Serializable]
 public struct InventorySlot {
-	public InventoryItem Item;
+	public Item Item;
 	public IntegerVariable Count;
 	public IntegerReference Max;
 
