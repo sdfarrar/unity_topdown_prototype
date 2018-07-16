@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 986276ab4ebe23c44b2f5ca41eca5da0, type: 3}
-  m_Name: InventoryV2
+  m_Name: PlayerInventory
   m_EditorClassIdentifier: 
   Serializer: {fileID: 11400000, guid: d3d93659995b0bc4fb93c7638d3d1cac, type: 2}
   Wallet: {fileID: 11400000, guid: 862f17b837e75384ba0a841660b9e785, type: 2}
@@ -20,6 +20,7 @@ MonoBehaviour:
       UseConstant: 0
       ConstantValue: 0
       Variable: {fileID: 11400000, guid: ce186be9518b00c4bbcddef8a4fbc5c1, type: 2}
+    Unlocked: 0
   Arrows:
     Item: {fileID: 0}
     Count: {fileID: 0}
@@ -27,6 +28,7 @@ MonoBehaviour:
       UseConstant: 1
       ConstantValue: 0
       Variable: {fileID: 0}
+    Unlocked: 0
   OnInventoryChanged:
     m_PersistentCalls:
       m_Calls:
@@ -48,16 +50,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  InventoryState: {fileID: 114728030794537726}
---- !u!114 &114728030794537726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920fee9ea2940eb4e8d315638df56dd7, type: 3}
-  m_Name: InventoryState
-  m_EditorClassIdentifier: 
-  HERLP: 
+  Slots:
+  - Item: {fileID: 11400000, guid: 6445d9c1d8dd24544bcec373c87b09ff, type: 2}
+    Count: {fileID: 11400000, guid: 78b43436081af914087c73365cfd318d, type: 2}
+    Max:
+      UseConstant: 0
+      ConstantValue: 0
+      Variable: {fileID: 11400000, guid: ce186be9518b00c4bbcddef8a4fbc5c1, type: 2}
+    Unlocked: 0

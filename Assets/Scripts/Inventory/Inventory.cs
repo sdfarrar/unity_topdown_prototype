@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+#if UNITY_EDITOR
+using System.Reflection;
+using UnityEditor;
+#endif
+
 [CreateAssetMenu(menuName="Inventory/Inventory")]
 public class Inventory : ScriptableObject {
 
@@ -18,7 +23,20 @@ public class Inventory : ScriptableObject {
 	public UnityEvent OnInventoryChanged;
 	public UnityEvent OnNewItemAdded;
 
-	public InventoryState InventoryState;
+	// Used to build item lookup table
+	[SerializeField]
+	private List<InventorySlot> Slots = new List<InventorySlot>();
+
+	private Dictionary<string, Item> itemLookup = new Dictionary<string, Item>();
+
+	//public InventoryState InventoryState;
+
+	private void OnEnable()	{
+		itemLookup.Clear();
+		for(int i=0; i<Slots.Count; ++i){
+			itemLookup.Add(Slots[i].Item.GUID, Slots[i].Item);
+		}
+	}
 
 	public void Save() {
 		//Serializer.Serialize("inventory", InventoryState);
@@ -40,6 +58,12 @@ public class Inventory : ScriptableObject {
 		return true;
 	}
 
+	public void UnlockItem(Item item){
+		//TODO lookup item in map
+		//TODO set unlocked to true
+
+	}
+
 	public bool ApplyChangeToWallet(int delta){
 		Wallet.ApplyChange(delta);
 		OnInventoryChanged.Invoke();
@@ -51,13 +75,35 @@ public class Inventory : ScriptableObject {
 		OnInventoryChanged.Invoke();
 	}
 
-	public void Reset(){
+	public void ResetInventory(){
 		Bombs.Count.SetValue(0);
 		Wallet.CurrentAmount = 0;
 		OnInventoryChanged.Invoke();
 	}
 
 #if UNITY_EDITOR
+
+	private void OnValidate() {
+		Slots = new List<InventorySlot>();
+
+		FieldInfo[] props = this.GetType().GetFields();
+		foreach(FieldInfo prop in props){
+			if(prop.FieldType == typeof(InventorySlot)){
+				InventorySlot slot = (InventorySlot)prop.GetValue(this);
+				if(slot.Item==null){ continue; }
+				SetItemGUID(slot.Item);
+				Slots.Add(slot);
+			}
+		}
+		UnityEditor.EditorUtility.SetDirty(this);
+	}
+
+	private void SetItemGUID(Item item){
+		if(item==null){return;}
+		string path = AssetDatabase.GetAssetPath(item);
+		string guid = AssetDatabase.AssetPathToGUID(path);
+		item.GUID = guid;
+	}
 
 	//private void OnValidate() {
 	//	FindItems();
@@ -96,12 +142,10 @@ public class Inventory : ScriptableObject {
 	//private void SaveFromEditor(){ Save(); }
 	//[ContextMenu("Load")]
 	//private void LoadFromEditor(){ Load(); }
-	//[ContextMenu("Clear")]
-	//private void ClearState(){
-	//	foreach (var item in Items) {
-	//		InventoryState.Remove(item);
-	//	}
-	//}
+	[ContextMenu("Clear")]
+	private void ClearLookup(){
+		itemLookup.Clear();
+	}
 
 #endif
 }
@@ -111,6 +155,7 @@ public struct InventorySlot {
 	public Item Item;
 	public IntegerVariable Count;
 	public IntegerReference Max;
+	public bool Unlocked;
 
 	public void ApplyChangeToCount(int value){
 		int amount = Mathf.Clamp(Count.Value+value, 0, Max.Value);

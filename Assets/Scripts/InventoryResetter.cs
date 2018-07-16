@@ -18,7 +18,7 @@ public class InventoryResetter : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D other)	{
 		if(other.CompareTag("Player")){
 			Debug.Log("Resetting player stats....");
-			Inventory.Reset();
+			Inventory.ResetInventory();
 			PlayerMagic.SetValue(MagicResetValue);
 		}
 	}

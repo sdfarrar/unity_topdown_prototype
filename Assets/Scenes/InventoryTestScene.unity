@@ -309,7 +309,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015258789, y: -14.84}
+  m_AnchoredPosition: {x: 0.000015258789, y: -65}
   m_SizeDelta: {x: 44, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &134596641
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.38
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!222 &162251753
@@ -4924,7 +4924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a694bffb450f4a4cadba35e4632560a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Inventory: {fileID: 11400000, guid: 365d63d8fe97bf9418227b6c9ae8194e, type: 2}
+  Inventory: {fileID: 11400000, guid: 97c9d386a0a248b48b36e15bcf52824a, type: 2}
   PlayerMagic: {fileID: 11400000, guid: 1eb9d9b1d1bc3104ba057f815710d25b, type: 2}
   MagicResetValue: 0
 --- !u!4 &1181661135
@@ -5635,14 +5635,12 @@ Prefab:
         type: 2}
       propertyPath: Inventory
       value: 
-      objectReference: {fileID: 11400000, guid: 365d63d8fe97bf9418227b6c9ae8194e,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 114271561678639792, guid: fcb63e7f7a3c8df47806bfee56ce659e,
         type: 2}
       propertyPath: PlayerInventory
       value: 
-      objectReference: {fileID: 11400000, guid: 365d63d8fe97bf9418227b6c9ae8194e,
-        type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcb63e7f7a3c8df47806bfee56ce659e, type: 2}
   m_IsPrefabAsset: 0

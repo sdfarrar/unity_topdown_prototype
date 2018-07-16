@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName="Inventory/Item")]
 public class Item : ScriptableObject {
 	[ReadOnlyInEditor]
+	public string GUID;
 	public bool Unique;
 	public Sprite Sprite;
 
