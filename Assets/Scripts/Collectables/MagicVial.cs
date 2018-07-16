@@ -19,7 +19,7 @@ public class MagicVial : MonoBehaviour, ICollectable {
 		}
 	}
 
-    public void OnCollect(InventoryV2 inventory) {
+    public void OnCollect(Inventory inventory) {
 		int amount = Mathf.Clamp(MagicAmount.Value + Template.Quantity.Value, 0, MaxMagicAmount.Value);
 		MagicAmount.SetValue(amount);
 		OnCollectEvent.Invoke();

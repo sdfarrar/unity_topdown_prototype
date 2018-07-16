@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName="Inventory/InventoryV2")]
-public class InventoryV2 : ScriptableObject {
+[CreateAssetMenu(menuName="Inventory/Inventory")]
+public class Inventory : ScriptableObject {
 
 
 	public Serializer Serializer;
@@ -18,7 +18,7 @@ public class InventoryV2 : ScriptableObject {
 	public UnityEvent OnInventoryChanged;
 	public UnityEvent OnNewItemAdded;
 
-	public InventoryStateV2 InventoryState;
+	public InventoryState InventoryState;
 
 	public void Save() {
 		//Serializer.Serialize("inventory", InventoryState);

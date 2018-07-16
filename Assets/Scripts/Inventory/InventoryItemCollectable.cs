@@ -16,7 +16,7 @@ public class InventoryItemCollectable : MonoBehaviour, ICollectable {
 		renderer.sprite = Drop.Item.Sprite;
 	}
 
-    public void OnCollect(InventoryV2 inventory) {
+    public void OnCollect(Inventory inventory) {
 		if(inventory.UpdateItemQuantity(Drop.Item, Drop.Quantity.Value)){
 			Destroy(this.gameObject);
 		}

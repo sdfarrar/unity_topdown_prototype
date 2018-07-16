@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryStateV2 : ScriptableObject {
+public class InventoryState : ScriptableObject {
 
 	public string HERLP;
 

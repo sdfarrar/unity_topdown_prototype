@@ -6,6 +6,8 @@ using UnityEditor;
 [CustomEditor(typeof(AbstractItemDrop), true)]
 public class ItemDropEditor : Editor {
 
+	private static string TAG = "Collectable";
+
 	private Collider2D collider;
 	private SpriteRenderer renderer;
 
@@ -23,5 +25,10 @@ public class ItemDropEditor : Editor {
 		if(!collider.isTrigger){
 			EditorGUILayout.HelpBox("Collider should be set to trigger!", MessageType.Warning);
 		}
+
+		if(!drop.CompareTag(TAG)){
+			EditorGUILayout.HelpBox("GameObject should use the \"" + TAG + "\" tag!", MessageType.Warning);
+		}
+		
 	}
 }

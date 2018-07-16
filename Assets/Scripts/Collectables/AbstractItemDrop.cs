@@ -12,6 +12,6 @@ public abstract class AbstractItemDrop : MonoBehaviour, ICollectable {
 	public bool AutoUpdateSprite;
 #endif
 
-	public abstract void OnCollect(InventoryV2 inventory);
+	public abstract void OnCollect(Inventory inventory);
 
 }
