@@ -9,32 +9,32 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1433178630317892}
+  m_RootGameObject: {fileID: 1148966589942790}
   m_IsPrefabAsset: 1
---- !u!1 &1433178630317892
+--- !u!1 &1148966589942790
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4121484110628422}
-  - component: {fileID: 61154981200330402}
-  - component: {fileID: 212182136638794380}
-  - component: {fileID: 114540198545514804}
+  - component: {fileID: 4874840895952378}
+  - component: {fileID: 212541287972664834}
+  - component: {fileID: 61623846639589652}
+  - component: {fileID: 114056341633543758}
   m_Layer: 0
-  m_Name: BombKeyItem
+  m_Name: RedRoople
   m_TagString: Collectable
-  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4121484110628422
+--- !u!4 &4874840895952378
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1433178630317892}
+  m_GameObject: {fileID: 1148966589942790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -42,19 +42,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61154981200330402
+--- !u!61 &61623846639589652
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1433178630317892}
+  m_GameObject: {fileID: 1148966589942790}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.077804565}
+  m_Offset: {x: -0.015217632, y: 0.00073587894}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -65,27 +65,26 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3118313, y: 0.28103828}
+  m_Size: {x: 0.21687108, y: 0.43324447}
   m_EdgeRadius: 0
---- !u!114 &114540198545514804
+--- !u!114 &114056341633543758
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1433178630317892}
+  m_GameObject: {fileID: 1148966589942790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3f8785f67e23e5409b6f6b8dccf6e6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a53cfd6e07f47846ac50ffb55914098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Drop: {fileID: 11400000, guid: cb2465278b7d74643b94043852331040, type: 2}
-  InitialCount: 5
---- !u!212 &212182136638794380
+  template: {fileID: 11400000, guid: c52a9c7993afa6345a212689aea05a2a, type: 2}
+--- !u!212 &212541287972664834
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1433178630317892}
+  m_GameObject: {fileID: 1148966589942790}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -115,7 +114,7 @@ SpriteRenderer:
   m_SortingLayerID: 528102539
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 704071e10e9accc49bcc1694c3be7252, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 37a6ddad3a9205d4dafe5658c6eb0c42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

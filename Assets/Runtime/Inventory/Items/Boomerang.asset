@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f78ad457a929ed04c939f7c947318329, type: 3}
   m_Name: Boomerang
   m_EditorClassIdentifier: 
-  GUID: 
-  Icon: {fileID: 0}
-  Acquired: 0
+  GUID: d9f283269854abd4294964285f00dcad
+  Unique: 0
+  Sprite: {fileID: 0}

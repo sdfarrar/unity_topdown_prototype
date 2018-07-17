@@ -9,45 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1148966589942790}
+  m_RootGameObject: {fileID: 1487892403875192}
   m_IsPrefabAsset: 1
---- !u!1 &1148966589942790
+--- !u!1 &1487892403875192
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4874840895952378}
-  - component: {fileID: 212541287972664834}
-  - component: {fileID: 61623846639589652}
-  - component: {fileID: 114056341633543758}
+  - component: {fileID: 4322631220015352}
+  - component: {fileID: 114761180280440996}
+  - component: {fileID: 212438987077405150}
+  - component: {fileID: 61446408038523120}
   m_Layer: 0
-  m_Name: RedRoople
+  m_Name: RoopleDrop
   m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4874840895952378
+--- !u!4 &4322631220015352
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1148966589942790}
+  m_GameObject: {fileID: 1487892403875192}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.76846796, y: -2.53, z: 0.08806587}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61623846639589652
+--- !u!61 &61446408038523120
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1148966589942790}
+  m_GameObject: {fileID: 1487892403875192}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -67,24 +67,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.21687108, y: 0.43324447}
   m_EdgeRadius: 0
---- !u!114 &114056341633543758
+--- !u!114 &114761180280440996
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1148966589942790}
+  m_GameObject: {fileID: 1487892403875192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a53cfd6e07f47846ac50ffb55914098, type: 3}
+  m_Script: {fileID: 11500000, guid: f26b1666fdd4ef6409f7ed3a1dd01a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  template: {fileID: 11400000, guid: c52a9c7993afa6345a212689aea05a2a, type: 2}
---- !u!212 &212541287972664834
+  Drop: {fileID: 11400000, guid: ff7f3b6875ee21d468bdab4631b6336a, type: 2}
+  AutoUpdateSprite: 1
+--- !u!212 &212438987077405150
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1148966589942790}
+  m_GameObject: {fileID: 1487892403875192}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -112,7 +113,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 528102539
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 37a6ddad3a9205d4dafe5658c6eb0c42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
