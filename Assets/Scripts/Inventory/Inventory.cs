@@ -11,11 +11,9 @@ using UnityEditor;
 [CreateAssetMenu(menuName="Inventory/Inventory")]
 public class Inventory : ScriptableObject {
 
-
 	public Serializer Serializer;
 	
 	public Wallet Wallet;
-	//public InventoryItem[] Items;
 
 	public InventorySlot Bombs;
 	public InventorySlot Arrows;
@@ -90,19 +88,11 @@ public class Inventory : ScriptableObject {
 		foreach(FieldInfo prop in props){
 			if(prop.FieldType == typeof(InventorySlot)){
 				InventorySlot slot = (InventorySlot)prop.GetValue(this);
-				if(slot.Item==null){ continue; }
-				SetItemGUID(slot.Item);
+				if(slot.Item==null || slot.Item.GUID.Equals("")){ continue; }
 				Slots.Add(slot);
 			}
 		}
-		UnityEditor.EditorUtility.SetDirty(this);
-	}
-
-	private void SetItemGUID(Item item){
-		if(item==null){return;}
-		string path = AssetDatabase.GetAssetPath(item);
-		string guid = AssetDatabase.AssetPathToGUID(path);
-		item.GUID = guid;
+		EditorUtility.SetDirty(this);
 	}
 
 	//private void OnValidate() {
