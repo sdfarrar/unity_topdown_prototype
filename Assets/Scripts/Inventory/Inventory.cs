@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -56,9 +57,14 @@ public class Inventory : ScriptableObject {
 		return true;
 	}
 
-	public void UnlockItem(Item item){
-		//TODO lookup item in map
-		//TODO set unlocked to true
+	public bool UnlockItem(Item item, int quantity){
+		InventorySlot slot = Slots.Find(s =>  s.Item.GUID == item.GUID );
+		if(slot == null){ return false; }
+
+		slot.Unlocked = true;
+		slot.ApplyChangeToCount(quantity);
+		OnInventoryChanged.Invoke();
+		return true;
 	}
 
 	public bool ApplyChangeToWallet(int delta){
@@ -95,43 +101,11 @@ public class Inventory : ScriptableObject {
 		EditorUtility.SetDirty(this);
 	}
 
-	//private void OnValidate() {
-	//	FindItems();
-	//	InventoryStateV2 state = UnityEditor.AssetDatabase.LoadAssetAtPath<InventoryStateV2>(UnityEditor.AssetDatabase.GetAssetPath(this));
-	//	if(state==null) {
-	//		state = ScriptableObject.CreateInstance<InventoryStateV2>();
-	//		state.name = "InventoryState";
-	//		UnityEditor.AssetDatabase.AddObjectToAsset(state, this);
-	//		UnityEditor.AssetDatabase.SaveAssets();
-	//	}
-	//	InventoryState = state;
-	//}
 
-	//[ContextMenu("Populate Items")]
-	//private void FindItems() {
-	//	string[] guids = UnityEditor.AssetDatabase.FindAssets("t:" + typeof(InventoryItem).Name);
-	//	Items = new InventoryItem[guids.Length];
-	//	for(int i=0; i<guids.Length; ++i){
-	//		string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guids[i]);
-	//		InventoryItem item = UnityEditor.AssetDatabase.LoadAssetAtPath<InventoryItem>(path);
-	//		Items[i] = item;
-	//		item.GUID = guids[i];
-	//		UnityEditor.EditorUtility.SetDirty(this);
-	//	}
-	//}
-
-	//[ContextMenu("Add Random Item")]
-	//private void AddRandomItem() {
-	//	int index = Random.Range(0, Items.Length);
-	//	InventoryItem item = Items[index];
-	//	Debug.Log("Adding: " + item.name);
-	//	AddItem(item);
-	//}
-
-	//[ContextMenu("Save")]
-	//private void SaveFromEditor(){ Save(); }
-	//[ContextMenu("Load")]
-	//private void LoadFromEditor(){ Load(); }
+	[ContextMenu("Save")]
+	private void SaveFromEditor(){ Save(); }
+	[ContextMenu("Load")]
+	private void LoadFromEditor(){ Load(); }
 	[ContextMenu("Clear")]
 	private void ClearLookup(){
 		itemLookup.Clear();
@@ -141,7 +115,7 @@ public class Inventory : ScriptableObject {
 }
 
 [System.Serializable]
-public struct InventorySlot {
+public class InventorySlot {
 	public Item Item;
 	public IntegerVariable Count;
 	public IntegerReference Max;

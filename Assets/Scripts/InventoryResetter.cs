@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class InventoryResetter : MonoBehaviour {
@@ -11,6 +12,8 @@ public class InventoryResetter : MonoBehaviour {
 	[Range(0, 100)]
 	public int MagicResetValue;
 
+	public UnityEvent OnResetEvent;
+
 	private void Awake(){
 		GetComponent<BoxCollider2D>().isTrigger = true;
 	}
@@ -20,6 +23,7 @@ public class InventoryResetter : MonoBehaviour {
 			Debug.Log("Resetting player stats....");
 			Inventory.ResetInventory();
 			PlayerMagic.SetValue(MagicResetValue);
+			OnResetEvent.Invoke();
 		}
 	}
 }

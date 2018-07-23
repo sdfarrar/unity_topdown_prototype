@@ -20,7 +20,7 @@ MonoBehaviour:
       UseConstant: 0
       ConstantValue: 0
       Variable: {fileID: 11400000, guid: ce186be9518b00c4bbcddef8a4fbc5c1, type: 2}
-    Unlocked: 1
+    Unlocked: 0
   Arrows:
     Item: {fileID: 0}
     Count: {fileID: 0}

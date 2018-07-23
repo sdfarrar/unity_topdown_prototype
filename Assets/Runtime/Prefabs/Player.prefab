@@ -572,7 +572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerMovement: {fileID: 114755104027967544}
-  PlayerEquipped: 0
+  PlayerEquipped: 1
 --- !u!114 &114846851265155986
 MonoBehaviour:
   m_ObjectHideFlags: 1

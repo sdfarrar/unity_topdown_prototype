@@ -45,7 +45,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable {
 	}
 
 	private void GetHealth(HealthReplenisher replenisher){
-		//TODO dont exceed max health
 		HP.ApplyChange(replenisher.HealAmount);
 		if(HP.Value>MaxHP.Value){ HP.SetValue(MaxHP); }
 

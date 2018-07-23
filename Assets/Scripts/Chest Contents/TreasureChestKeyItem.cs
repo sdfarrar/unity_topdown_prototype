@@ -6,10 +6,7 @@ using UnityEngine;
 public class TreasureChestKeyItem : TreasureChestContents {
 
 	public override bool AddToInventory(Inventory inventory){
-		//inventory.UnlockItem(Contents.Item);
-        inventory.Bombs.Unlocked = true;
-        inventory.ApplyBombCountChange(Contents.Quantity);
-		return true;
+		return inventory.UnlockItem(Contents.Item, Contents.Quantity);
 	}
 
 }
