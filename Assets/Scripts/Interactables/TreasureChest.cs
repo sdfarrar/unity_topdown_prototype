@@ -44,12 +44,8 @@ public class TreasureChest : MonoBehaviour, IInteractable {
 	}
 
 	private void AddItemToInventory(Inventory inventory){
-		if(Contents.IsKeyItem){
-			inventory.AddItem(Contents.Drop.Item, Contents.InitialCount);
-		}else{
-			//Ignores whether contents cannot be fully added to inventory and ignore excess
-			inventory.UpdateItemQuantity(Contents.Drop.Item, Contents.Drop.Quantity);
-		}
+        //TODO should check if this returns false in the event item does not fit in inventory
+        Contents.AddToInventory(inventory);
 	}
 
 	// if player is below the chest, return true

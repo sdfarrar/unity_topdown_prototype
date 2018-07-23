@@ -59,7 +59,6 @@ public class Inventory : ScriptableObject {
 	public void UnlockItem(Item item){
 		//TODO lookup item in map
 		//TODO set unlocked to true
-
 	}
 
 	public bool ApplyChangeToWallet(int delta){
@@ -74,6 +73,7 @@ public class Inventory : ScriptableObject {
 	}
 
 	public void ResetInventory(){
+        Bombs.Unlocked = false;
 		Bombs.Count.SetValue(0);
 		Wallet.CurrentAmount = 0;
 		OnInventoryChanged.Invoke();
