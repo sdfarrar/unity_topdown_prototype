@@ -18,7 +18,8 @@ public class FieldOfView : MonoBehaviour {
 	public LayerMask targetMask;
 	public LayerMask obstacleMask;
 
-	public List<Transform> visibileTargets = new List<Transform>();
+	public List<Transform> visibleTargets = new List<Transform>();
+    public Transform LastTarget { get; private set; }
 
 	private Collider2D[] targetsBuffer = new Collider2D[4]; // probably only player
 
@@ -34,7 +35,7 @@ public class FieldOfView : MonoBehaviour {
 	}
 
 	void FindVisibleTargets(){
-		visibileTargets.Clear();
+		visibleTargets.Clear();
 		int hits = Physics2D.OverlapCircleNonAlloc(transform.position, viewRadius, targetsBuffer, targetMask);
 		for(int i=0; i<hits; ++i){
 			Transform target = targetsBuffer[i].transform;
@@ -44,9 +45,11 @@ public class FieldOfView : MonoBehaviour {
 			if(Vector3.Angle(transform.up, dirToTarget) < viewAngle / 2){
 				float dstToTarget = Vector3.Distance(transform.position, target.position);
 				if(!Physics2D.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask)){
-					visibileTargets.Add(target);
+                    if(visibleTargets.Count==0){ LastTarget = target; } // Keep track of the first target found
+					visibleTargets.Add(target);
 				}
 			}
+
 		}
 		
 	}

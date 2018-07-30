@@ -12,8 +12,7 @@ namespace AI {
         }
 
         private bool Look(StateController controller) {
-            //TODO Check field of view and return results
-            return false;
+            return controller.Eyes.visibleTargets.Count!=0;
         }
 
     }

@@ -9,12 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe46bc68bf4dca845a5d0e020f9016a6, type: 3}
-  m_Name: PatrolChaser
+  m_Name: Chase
   m_EditorClassIdentifier: 
   Actions:
-  - {fileID: 11400000, guid: 7fb36ea61045a6544ad7cb283d22114a, type: 2}
-  Transitions:
-  - Decision: {fileID: 11400000, guid: 4ac68c38e77a9324ab052290e87314ab, type: 2}
-    TrueState: {fileID: 11400000, guid: 73e31da376fdc0c479ac31bd8c59bac8, type: 2}
-    FalseState: {fileID: 0}
-  GizmoColor: {r: 1, g: 0.6301484, b: 0.051886797, a: 1}
+  - {fileID: 11400000, guid: a58ab556b10af0e43a72be202f4b59c3, type: 2}
+  Transitions: []
+  GizmoColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

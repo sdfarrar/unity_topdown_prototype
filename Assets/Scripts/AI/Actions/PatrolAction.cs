@@ -11,7 +11,7 @@ namespace AI {
 
         private void Patrol(StateController controller) {
             Vector3 waypoint = controller.Waypoints[controller.NextWaypoint].position;
-            controller.transform.position = Vector3.MoveTowards(controller.transform.position, waypoint, 5f * Time.deltaTime);
+            controller.transform.position = Vector3.MoveTowards(controller.transform.position, waypoint, controller.EnemyStats.MoveSpeed * Time.deltaTime);
             if(waypoint == controller.transform.position){
                 controller.NextWaypoint = (controller.NextWaypoint + 1) % controller.Waypoints.Length;
             }

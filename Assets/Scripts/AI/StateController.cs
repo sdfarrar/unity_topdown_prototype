@@ -7,8 +7,8 @@ namespace AI {
     public class StateController : MonoBehaviour {
 
         public State CurrentState;
-        //public EnemyStats enemyStats;
-        public Transform Eyes;
+        public EnemyStats EnemyStats;
+        public FieldOfView Eyes;
         //public State RemainState;
 
         public Transform WaypointsParent;
@@ -39,6 +39,7 @@ namespace AI {
 
         public void TransitionToState(State nextState){
             //if(nextState==RemainState){ return; }
+            if(nextState==null){ return; } // remain in current state
             CurrentState = nextState;
             OnExitState();
         }

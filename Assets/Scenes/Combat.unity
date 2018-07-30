@@ -173,7 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentState: {fileID: 11400000, guid: e0d3aa9fdd195ea4da24aa23040a3b9d, type: 2}
-  Eyes: {fileID: 1148075151}
+  EnemyStats: {fileID: 11400000, guid: 832e1b6d88511c84b99d4b1a499c8429, type: 2}
+  Eyes: {fileID: 1148075152}
   WaypointsParent: {fileID: 8505482}
   Waypoints: []
   NextWaypoint: 0
@@ -268,7 +269,7 @@ GameObject:
   m_Layer: 0
   m_Name: Waypoint2
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -408,15 +409,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab132d4948239946bf89aa28015da30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 3.39
-  viewAngle: 57
+  viewRadius: 3.5
+  viewAngle: 60
   targetMask:
     serializedVersion: 2
     m_Bits: 8192
   obstacleMask:
     serializedVersion: 2
     m_Bits: 16384
-  visibileTargets: []
+  visibleTargets: []
 --- !u!1001 &1151799637
 Prefab:
   m_ObjectHideFlags: 0
@@ -3486,7 +3487,7 @@ GameObject:
   m_Layer: 0
   m_Name: Waypoint1
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

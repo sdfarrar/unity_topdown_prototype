@@ -10,6 +10,8 @@ namespace AI {
         public Transition[] Transitions;
         public Color GizmoColor = Color.gray;
 
+        //TODO probably add OnStateEnter and OnStateExit methods
+
         public void UpdateState(StateController controller){
             DoActions(controller);
             CheckTransitions(controller);
@@ -23,11 +25,9 @@ namespace AI {
 
         private void CheckTransitions(StateController controller){
             for(int i=0; i<Transitions.Length; ++i){
-                bool decisionSucceeded = Transitions[i].Decision.Decide(controller);
-                if(decisionSucceeded){
-                }else{
+                if(Transitions[i].Decision==null){ continue; }
 
-                }
+                bool decisionSucceeded = Transitions[i].Decision.Decide(controller);
                 State toState = (decisionSucceeded) ? Transitions[i].TrueState : Transitions[i].FalseState;
                 controller.TransitionToState(toState);
             }
