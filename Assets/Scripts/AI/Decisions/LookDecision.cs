@@ -12,7 +12,9 @@ namespace AI {
         }
 
         private bool Look(StateController controller) {
-            return controller.Eyes.visibleTargets.Count!=0;
+            if(controller.Eyes.visibleTargets.Count==0){ return false; }
+            controller.ChaseTarget = controller.Eyes.LastTarget;
+            return true;
         }
 
     }

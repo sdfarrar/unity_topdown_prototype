@@ -11,8 +11,9 @@ namespace AI {
         }
 
         private void Chase(StateController controller) {
-            Vector3 target = controller.Eyes.LastTarget.position;
-            controller.transform.position = Vector3.MoveTowards(controller.transform.position, target, controller.EnemyStats.MoveSpeed * Time.deltaTime);
+            Transform target = controller.Eyes.LastTarget;
+            if(target==null){ return; }
+            controller.transform.position = Vector3.MoveTowards(controller.transform.position, target.position, controller.EnemyStats.MoveSpeed * Time.deltaTime);
         }
     }
 }

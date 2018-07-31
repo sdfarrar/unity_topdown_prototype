@@ -8,14 +8,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c32cbc24f011eb04298c1af25448fa1e, type: 3}
-  m_Name: DarknutStats
+  m_Script: {fileID: 11500000, guid: 16419fb08610fa54d8950208ce869f27, type: 3}
+  m_Name: ActiveStateDecision
   m_EditorClassIdentifier: 
-  MoveSpeed: 1.5
-  ViewRadius: 3.5
-  ViewAngle: 60
-  SearchDuration: 4
-  AttackRange: 1
-  AttackRate: 0.5
-  AttackDamage: 10
-  ContactDamage: 20

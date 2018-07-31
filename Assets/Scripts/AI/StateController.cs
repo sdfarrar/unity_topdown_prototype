@@ -17,6 +17,8 @@ namespace AI {
         [HideInInspector] public Transform ChaseTarget;
         [HideInInspector] public float TimeInState;
 
+        [HideInInspector] public Collider2D[] collisionEntities = new Collider2D[4];
+
         private bool aiActive;
 
         void Awake () {
