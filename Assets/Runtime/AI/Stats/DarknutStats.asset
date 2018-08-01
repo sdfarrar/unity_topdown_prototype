@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c32cbc24f011eb04298c1af25448fa1e, type: 3}
   m_Name: DarknutStats
   m_EditorClassIdentifier: 
-  MoveSpeed: 1.5
+  MoveSpeed: 3
   ViewRadius: 3.5
   ViewAngle: 60
   SearchDuration: 4

@@ -12,8 +12,18 @@ namespace AI{
         }
 
         private bool Scan(StateController controller) {
-            //TODO stop moving, turn eyes, get time from controller
-            return controller.CheckIfCountDownElapsed(.5f);
+            //Quaternion from = controller.Eyes.transform.rotation;
+            //Quaternion to = (from.eulerAngles.z==180)
+            //    ? Quaternion.Euler(0, 0, 90)
+            //    : Quaternion.Euler(0, 0, 270);
+            //float step = 180 * Time.deltaTime;
+            //controller.Eyes.transform.rotation = Quaternion.RotateTowards(from, to, step);
+            
+            bool elapsed = controller.CheckIfCountDownElapsed(.5f);
+            //if(elapsed){
+            //    controller.Eyes.transform.rotation = to;
+            //}
+            return elapsed;
         }
     }
 }
