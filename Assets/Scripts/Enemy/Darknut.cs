@@ -17,7 +17,8 @@ public class Darknut : MonoBehaviour {
     public State CurrentState;
 
     private Transform target;
-    private float originalAngle;
+    private float facingAngle;
+    private float lastFacingAngle;
 
     private bool rotateLeft, rotateRight;
     private float elapsedRotation;
@@ -32,8 +33,7 @@ public class Darknut : MonoBehaviour {
 	void Awake() {
 		CurrentState = State.Patrolling;
         Waypoints = WaypointsParent.transform.Cast<Transform>().ToArray(); // GetComponentsInChildren returns WaypointsParent + children so we do this instead
-        //TODO flip angle depending on direction of next waypoint
-        originalAngle = Eyes.transform.localEulerAngles.z;
+        UpdateFacing();
 	}
 	
 	void Update() {
@@ -59,13 +59,6 @@ public class Darknut : MonoBehaviour {
         if(waypoint == Character.transform.position){
             ComputeNextWaypoint();
             CurrentState = State.Scanning;
-            waypoint = Waypoints[NextWaypoint].position;
-            Vector3 heading = waypoint - Character.transform.position;
-            Vector3 direction = heading.normalized; // not concerned with the distance
-            //float distance = heading.magnitude;
-            //Vector3 direction = heading / distance;
-            //TODO rotate eyes to face next waypoint
-            originalAngle = Eyes.transform.localEulerAngles.z;
             rotateLeft = true;
             rotateRight = false;
             elapsedRotation = 0;
@@ -91,7 +84,16 @@ public class Darknut : MonoBehaviour {
         }
         if(!rotateLeft && !rotateRight && RotateCenter()){
             CurrentState = State.Patrolling;
+            UpdateFacing();
         }
+    }
+
+    private void UpdateFacing() {
+        Vector3 heading = Waypoints[NextWaypoint].transform.position - Character.transform.position;
+        Vector3 direction = heading.normalized;
+        lastFacingAngle = facingAngle;
+        facingAngle = Vector2.SignedAngle(Vector2.up, direction); // TODO should we limit this to multiples of 90?
+        Eyes.transform.localRotation = Quaternion.Euler(0, 0, facingAngle);
     }
 
     private void Chase() {
@@ -115,7 +117,8 @@ public class Darknut : MonoBehaviour {
 
     private bool RotateLeft() {
         Quaternion from = Eyes.transform.localRotation;
-        Quaternion to = Quaternion.Euler(0, 0, 91);
+        float angle = facingAngle - 89f;
+        Quaternion to = Quaternion.Euler(0, 0, angle);
         float t = elapsedRotation/rotationSpeed;
         elapsedRotation += Time.deltaTime;
         Eyes.transform.localRotation = Quaternion.Lerp(from, to, t);
@@ -124,7 +127,8 @@ public class Darknut : MonoBehaviour {
 
     private bool RotateRight() {
         Quaternion from = Eyes.transform.localRotation;
-        Quaternion to = Quaternion.Euler(0, 0, 271);
+        float angle = facingAngle + 91f;
+        Quaternion to = Quaternion.Euler(0, 0, angle);
         float t = elapsedRotation/rotationSpeed;
         elapsedRotation += Time.deltaTime;
         Eyes.transform.localRotation = Quaternion.Lerp(from, to, t);
@@ -133,7 +137,7 @@ public class Darknut : MonoBehaviour {
 
     private bool RotateCenter() {
         Quaternion from = Eyes.transform.localRotation;
-        Quaternion to = Quaternion.Euler(0, 0, originalAngle);
+        Quaternion to = Quaternion.Euler(0, 0, facingAngle);
         float t = elapsedRotation/rotationSpeed;
         elapsedRotation += Time.deltaTime;
         Eyes.transform.localRotation = Quaternion.Lerp(from, to, t);
