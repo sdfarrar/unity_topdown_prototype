@@ -3808,9 +3808,9 @@ MonoBehaviour:
   Character: {fileID: 1808561443}
   Eyes: {fileID: 188497560}
   WaypointsParent: {fileID: 1896964272}
-  CyclicalWaypoints: 1
+  CyclicalWaypoints: 0
   Waypoints: []
-  NextWaypoint: 0
+  FromWaypointIndex: 0
   CurrentState: 0
 --- !u!1 &1896964271
 GameObject:

@@ -12,7 +12,7 @@ public class Darknut : MonoBehaviour {
     public Transform WaypointsParent;
     public bool CyclicalWaypoints;
     [HideInInspector] public Transform[] Waypoints;
-    [HideInInspector] public int NextWaypoint;
+    private int FromWaypointIndex;
 
     public State CurrentState;
 
@@ -54,7 +54,9 @@ public class Darknut : MonoBehaviour {
     }
 
     private void Patrol() {
-        Vector3 waypoint = Waypoints[NextWaypoint].position;
+        FromWaypointIndex %= Waypoints.Length;
+        int toWaypointIndex = (FromWaypointIndex+1) % Waypoints.Length;
+        Vector3 waypoint = Waypoints[toWaypointIndex].position;
         Character.transform.position = Vector3.MoveTowards(Character.transform.position, waypoint, Stats.MoveSpeed * Time.deltaTime);
         if(waypoint == Character.transform.position){
             ComputeNextWaypoint();
@@ -66,8 +68,12 @@ public class Darknut : MonoBehaviour {
     }
 
     private void ComputeNextWaypoint(){
-        //TODO If waypoints are !cyclical we need to backtrack through the array
-        NextWaypoint = (NextWaypoint + 1) % Waypoints.Length;
+        ++FromWaypointIndex;
+        if(!CyclicalWaypoints && FromWaypointIndex>=Waypoints.Length-1){
+            FromWaypointIndex = 0;
+            System.Array.Reverse(Waypoints); // Probably ineffecient.
+        }
+
     }
 
     private void Scan(){
@@ -89,7 +95,8 @@ public class Darknut : MonoBehaviour {
     }
 
     private void UpdateFacing() {
-        Vector3 heading = Waypoints[NextWaypoint].transform.position - Character.transform.position;
+        int toWaypointIndex = (FromWaypointIndex+1) % Waypoints.Length;
+        Vector3 heading = Waypoints[toWaypointIndex].transform.position - Character.transform.position;
         Vector3 direction = heading.normalized;
         lastFacingAngle = facingAngle;
         facingAngle = Vector2.SignedAngle(Vector2.up, direction); // TODO should we limit this to multiples of 90?
