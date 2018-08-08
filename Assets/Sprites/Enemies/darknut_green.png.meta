@@ -1,14 +1,19 @@
 fileFormatVersion: 2
-guid: edae480ae6a64294ea96777497eec452
+guid: 055227910b6129542ae6abdff977e131
 TextureImporter:
   fileIDToRecycleName:
-    21300000: darknut_down_look_left
-    21300002: darknut_down_look_right
-    21300004: darknut_walk_down_1
-    21300006: darknut_walk_down_2
-    21300008: darknut_more_4
-    21300010: darknut_more_5
-    21300012: darknut_more_6
+    21300000: darknut_green_down_0
+    21300002: darknut_green_down_1
+    21300004: darknut_green_down_look_right
+    21300006: darknut_green_down_look_left
+    21300008: darknut_green_right_0
+    21300010: darknut_green_right_1
+    21300012: darknut_green_right_look_up
+    21300014: darknut_green_right_look_down
+    21300016: darknut_green_up_0
+    21300018: darknut_green_up_1
+    21300020: darknut_green_up_look_left
+    21300022: darknut_green_up_look_right
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -52,9 +57,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -91,13 +96,173 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: darknut_down_look_left
+      name: darknut_green_down_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8da17832ed05a85418f73b024f441134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: darknut_green_down_1
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 32
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d56d9fcf369a494280c37e314f05042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: darknut_green_down_look_right
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 32
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b789881354add84a8858aa58d661ec4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: darknut_green_down_look_left
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 32
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bad70000fb5dd934781eb3d4a34ffcc0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: darknut_green_right_0
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 32
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ed14c42c751b174ba0922741fdd0af4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: darknut_green_right_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 32
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aebeb8c979976d459e1179c02693dc2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: darknut_green_right_look_up
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 32
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 211dd290af1ec224f82516c16417e6e9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: darknut_green_right_look_down
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 32
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e690c2a124dc9a4ba811a35e023652e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: darknut_green_up_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 27.142857
-        height: 41
+        width: 20
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -105,19 +270,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c439dfcc84dccc4e9adaf6e64365e87
+      spriteID: 24441582ab69a654fab1518de2f8a325
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: darknut_down_look_right
+      name: darknut_green_up_1
       rect:
         serializedVersion: 2
-        x: 27
+        x: 20
         y: 0
-        width: 27.142857
-        height: 41
+        width: 20
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,19 +290,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63b85701025faeb41988f7eca439d422
+      spriteID: 1f2a0fca416e52a43becdece8f00e18e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: darknut_walk_down_1
+      name: darknut_green_up_look_left
       rect:
         serializedVersion: 2
-        x: 57
+        x: 40
         y: 0
-        width: 27
-        height: 41
+        width: 20
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,19 +310,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7afe2acc96e3e87428e6c4cdcb3400b7
+      spriteID: 8cc9a5a6f834d1c4c8f1b3a1c455b6d1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: darknut_walk_down_2
+      name: darknut_green_up_look_right
       rect:
         serializedVersion: 2
-        x: 84
+        x: 60
         y: 0
-        width: 26
-        height: 41
+        width: 20
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,67 +330,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23dafaa67502cc94c806377707862abd
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: darknut_more_4
-      rect:
-        serializedVersion: 2
-        x: 108
-        y: 0
-        width: 27.142857
-        height: 41
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 43c9821c613250f4c9d97097c013d106
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: darknut_more_5
-      rect:
-        serializedVersion: 2
-        x: 135
-        y: 0
-        width: 27.142857
-        height: 41
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6bed4a7b676150a4dba97c15d2568507
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: darknut_more_6
-      rect:
-        serializedVersion: 2
-        x: 161
-        y: 0
-        width: 27
-        height: 41
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4de34f099a667a842b3be57d7f51f141
+      spriteID: c52102cab76ef95449b2f9e89c8449a6
       vertices: []
       indices: 
       edges: []
@@ -233,7 +338,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 6e68be3a3e806ad458600483e4fcdeb7
+    spriteID: 57f2872db9676a441a9bedc5036d51de
     vertices: []
     indices: 
     edges: []
