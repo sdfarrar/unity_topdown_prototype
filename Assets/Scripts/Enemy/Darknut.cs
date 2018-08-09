@@ -16,6 +16,11 @@ public class Darknut : MonoBehaviour {
 
     public State CurrentState;
 
+    private AnimatorController animatorController;
+
+    //private Vector2 velocity;
+    private Vector2 direction;
+
     private Transform target;
     private float facingAngle;
     private float lastFacingAngle;
@@ -31,6 +36,7 @@ public class Darknut : MonoBehaviour {
     }
 
 	void Awake() {
+        animatorController = new AnimatorController(GetComponentInChildren<Animator>());
 		CurrentState = State.Patrolling;
         Waypoints = WaypointsParent.transform.Cast<Transform>().ToArray(); // GetComponentsInChildren returns WaypointsParent + children so we do this instead
         UpdateFacing();
@@ -39,12 +45,16 @@ public class Darknut : MonoBehaviour {
 	void Update() {
         GetComponentInChildren<SpriteRenderer>().color = Color.white;//TODO remove
 
+        Vector2 velocity = Vector2.zero;
+
         CurrentState = Look();
         switch(CurrentState){
-            case State.Patrolling: Patrol(); break;
+            case State.Patrolling: velocity = Patrol(); break;
             case State.Scanning: Scan(); break;
-            case State.Chasing: Chase(); Attack(); break;
+            case State.Chasing: velocity = Chase(); Attack(); break;
         }
+        Character.transform.Translate(velocity);
+        animatorController.Update(velocity, direction);
 	}
 
     private State Look() {
@@ -53,11 +63,11 @@ public class Darknut : MonoBehaviour {
         return State.Chasing;
     }
 
-    private void Patrol() {
+    private Vector2 Patrol() {
         FromWaypointIndex %= Waypoints.Length;
         int toWaypointIndex = (FromWaypointIndex+1) % Waypoints.Length;
         Vector3 waypoint = Waypoints[toWaypointIndex].position;
-        Character.transform.position = Vector3.MoveTowards(Character.transform.position, waypoint, Stats.MoveSpeed * Time.deltaTime);
+        Vector3 newPos = Vector3.MoveTowards(Character.transform.position, waypoint, Stats.MoveSpeed * Time.deltaTime);
         if(waypoint == Character.transform.position){
             ComputeNextWaypoint();
             CurrentState = State.Scanning;
@@ -65,6 +75,7 @@ public class Darknut : MonoBehaviour {
             rotateRight = false;
             elapsedRotation = 0;
         }
+        return newPos - Character.transform.position;
     }
 
     private void ComputeNextWaypoint(){
@@ -90,6 +101,7 @@ public class Darknut : MonoBehaviour {
         }
         if(!rotateLeft && !rotateRight && RotateCenter()){
             CurrentState = State.Patrolling;
+            elapsedRotation = 0;
             UpdateFacing();
         }
     }
@@ -97,16 +109,17 @@ public class Darknut : MonoBehaviour {
     private void UpdateFacing() {
         int toWaypointIndex = (FromWaypointIndex+1) % Waypoints.Length;
         Vector3 heading = Waypoints[toWaypointIndex].transform.position - Character.transform.position;
-        Vector3 direction = heading.normalized;
+        direction = heading.normalized;
         lastFacingAngle = facingAngle;
         facingAngle = Vector2.SignedAngle(Vector2.up, direction); // TODO should we limit this to multiples of 90?
         Eyes.transform.localRotation = Quaternion.Euler(0, 0, facingAngle);
     }
 
-    private void Chase() {
+    private Vector2 Chase() {
         Transform target = Eyes.LastTarget;
-        if(target==null){ return; }
-        Character.transform.position = Vector3.MoveTowards(Character.transform.position, target.position, Stats.MoveSpeed * Time.deltaTime);
+        if(target==null){ return Vector2.zero; }
+        Vector3 newPos = Vector3.MoveTowards(Character.transform.position, target.position, Stats.MoveSpeed * Time.deltaTime);
+        return newPos - Character.transform.position;
     }
 
     private void Attack() {
@@ -128,8 +141,9 @@ public class Darknut : MonoBehaviour {
         Quaternion to = Quaternion.Euler(0, 0, angle);
         float t = elapsedRotation/rotationSpeed;
         elapsedRotation += Time.deltaTime;
-        Eyes.transform.localRotation = Quaternion.Lerp(from, to, t);
-        return Eyes.transform.localRotation.eulerAngles.z==to.eulerAngles.z;
+        //Eyes.transform.localRotation = Quaternion.Lerp(from, to, t);
+        Eyes.transform.localRotation = to;
+        return elapsedRotation >= rotationSpeed;
     }
 
     private bool RotateRight() {
@@ -138,8 +152,9 @@ public class Darknut : MonoBehaviour {
         Quaternion to = Quaternion.Euler(0, 0, angle);
         float t = elapsedRotation/rotationSpeed;
         elapsedRotation += Time.deltaTime;
-        Eyes.transform.localRotation = Quaternion.Lerp(from, to, t);
-        return Eyes.transform.localRotation.eulerAngles.z==to.eulerAngles.z;
+        //Eyes.transform.localRotation = Quaternion.Lerp(from, to, t);
+        Eyes.transform.localRotation = to;
+        return elapsedRotation >= rotationSpeed;
     }
 
     private bool RotateCenter() {
@@ -147,8 +162,79 @@ public class Darknut : MonoBehaviour {
         Quaternion to = Quaternion.Euler(0, 0, facingAngle);
         float t = elapsedRotation/rotationSpeed;
         elapsedRotation += Time.deltaTime;
-        Eyes.transform.localRotation = Quaternion.Lerp(from, to, t);
-        return Eyes.transform.localRotation.eulerAngles.z==to.eulerAngles.z;
+        //Eyes.transform.localRotation = Quaternion.Lerp(from, to, t);
+        Eyes.transform.localRotation = to;
+        return elapsedRotation >= rotationSpeed;
     }
 
+
+    private class AnimatorController {
+        Animator anim;
+
+        public AnimatorController(Animator anim) {
+            this.anim = anim;
+        }
+
+        internal void Update(Vector2 velocity, Vector2 direction) {
+            anim.transform.localScale = new Vector3(1, 1, 1);
+            SetAnimTrigger(direction);
+            if(velocity==Vector2.zero){
+                IdleOnFirstFrame();
+            }else{
+                anim.speed = 1;
+            }
+
+        }
+
+        void IdleOnFirstFrame(){
+            // Reset state and freeze on first frame
+            int hash = anim.GetCurrentAnimatorStateInfo(0).fullPathHash;
+            anim.Play(hash, 0, 0);
+            anim.speed = 0;
+        }
+
+        //void Idle(Vector2 direction) {
+        //    anim.speed = 0;
+        //    if(direction==Vector2.up){
+        //        anim.SetTrigger("MoveUp");
+        //    }else if(direction==Vector2.down){
+        //        anim.SetTrigger("MoveDown");
+        //    }else if(direction==Vector2.right){
+        //        anim.SetTrigger("MoveRight");
+        //    }else if(direction==Vector2.left){
+        //        anim.SetTrigger("MoveRight");
+        //        anim.transform.localScale = new Vector3(-1, 1, 1);
+        //    }
+        //    int hash = anim.GetCurrentAnimatorStateInfo(0).fullPathHash;
+        //    anim.Play(hash, 0, 0);
+        //}
+
+        //void Moving(Vector2 direction) {
+        //    anim.speed = 1;
+        //    if(direction==Vector2.up){
+        //        anim.SetTrigger("MoveUp");
+        //    }else if(direction==Vector2.down){
+        //        anim.SetTrigger("MoveDown");
+        //    }else if(direction==Vector2.right){
+        //        anim.SetTrigger("MoveRight");
+        //    }else if(direction==Vector2.left){
+        //        anim.SetTrigger("MoveRight");
+        //        anim.transform.localScale = new Vector3(-1, 1, 1);
+        //    }
+        //}
+
+        void SetAnimTrigger(Vector2 direction){
+            if(direction==Vector2.up){
+                anim.SetTrigger("MoveUp");
+            }else if(direction==Vector2.down){
+                anim.SetTrigger("MoveDown");
+            }else if(direction==Vector2.right){
+                anim.SetTrigger("MoveRight");
+            }else if(direction==Vector2.left){
+                anim.SetTrigger("MoveRight");
+                anim.transform.localScale = new Vector3(-1, 1, 1);
+            }
+        }
+
+    }
 }
