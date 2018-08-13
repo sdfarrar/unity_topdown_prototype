@@ -7,6 +7,7 @@ public class Darknut : MonoBehaviour {
 
     public EnemyStats Stats;
     public Transform Character;
+    public Animator Animator;
     public FieldOfView Eyes;
 
     public Transform WaypointsParent;
@@ -36,7 +37,7 @@ public class Darknut : MonoBehaviour {
     }
 
 	void Awake() {
-        animatorController = new AnimatorController(GetComponentInChildren<Animator>());
+        animatorController = new AnimatorController(Animator);
 		CurrentState = State.Patrolling;
         Waypoints = WaypointsParent.transform.Cast<Transform>().ToArray(); // GetComponentsInChildren returns WaypointsParent + children so we do this instead
         UpdateFacing();
@@ -54,7 +55,7 @@ public class Darknut : MonoBehaviour {
             case State.Chasing: velocity = Chase(); Attack(); break;
         }
         Character.transform.Translate(velocity);
-        animatorController.Update(velocity, direction);
+        animatorController.Update(velocity);
 	}
 
     private State Look() {
@@ -175,13 +176,14 @@ public class Darknut : MonoBehaviour {
             this.anim = anim;
         }
 
-        internal void Update(Vector2 velocity, Vector2 direction) {
+        internal void Update(Vector2 velocity) {
             anim.transform.localScale = new Vector3(1, 1, 1);
-            SetAnimTrigger(direction);
+
+            SetAnimTrigger(velocity);
             if(velocity==Vector2.zero){
                 IdleOnFirstFrame();
             }else{
-                anim.speed = 1;
+                anim.speed = 1; // Reset animation speed
             }
 
         }
@@ -193,47 +195,41 @@ public class Darknut : MonoBehaviour {
             anim.speed = 0;
         }
 
-        //void Idle(Vector2 direction) {
-        //    anim.speed = 0;
-        //    if(direction==Vector2.up){
-        //        anim.SetTrigger("MoveUp");
-        //    }else if(direction==Vector2.down){
-        //        anim.SetTrigger("MoveDown");
-        //    }else if(direction==Vector2.right){
-        //        anim.SetTrigger("MoveRight");
-        //    }else if(direction==Vector2.left){
-        //        anim.SetTrigger("MoveRight");
-        //        anim.transform.localScale = new Vector3(-1, 1, 1);
-        //    }
-        //    int hash = anim.GetCurrentAnimatorStateInfo(0).fullPathHash;
-        //    anim.Play(hash, 0, 0);
-        //}
-
-        //void Moving(Vector2 direction) {
-        //    anim.speed = 1;
-        //    if(direction==Vector2.up){
-        //        anim.SetTrigger("MoveUp");
-        //    }else if(direction==Vector2.down){
-        //        anim.SetTrigger("MoveDown");
-        //    }else if(direction==Vector2.right){
-        //        anim.SetTrigger("MoveRight");
-        //    }else if(direction==Vector2.left){
-        //        anim.SetTrigger("MoveRight");
-        //        anim.transform.localScale = new Vector3(-1, 1, 1);
-        //    }
-        //}
-
-        void SetAnimTrigger(Vector2 direction){
-            if(direction==Vector2.up){
+        void SetAnimTrigger(Vector2 movement){
+            movement = SnapTo90(movement);
+            if(movement==Vector2.up){
                 anim.SetTrigger("MoveUp");
-            }else if(direction==Vector2.down){
+            }else if(movement==Vector2.down){
                 anim.SetTrigger("MoveDown");
-            }else if(direction==Vector2.right){
+            }else if(movement==Vector2.right){
                 anim.SetTrigger("MoveRight");
-            }else if(direction==Vector2.left){
+            }else if(movement==Vector2.left){
                 anim.SetTrigger("MoveRight");
                 anim.transform.localScale = new Vector3(-1, 1, 1);
             }
+        }
+
+        // Works fine but in instances where the movement flip flops quickly, it can look bad.
+        // Some sort of buffer would work good here
+        private Vector2 SnapTo90(Vector2 movement){
+            if(movement.x==1 || movement.y==1 || movement.x==-1 || movement.y==-1){ return movement; } // already at some 90 degree
+
+            if(movement.x >= 0 && movement.y >= 0){ // right and up
+                return AbsCompareVector2Components(movement) ? Vector2.right : Vector2.up;
+            }else if(movement.x >= 0 && movement.y <= 0){ // right and down
+                return AbsCompareVector2Components(movement) ? Vector2.right : Vector2.down;
+            }else if(movement.x <= 0 && movement.y <= 0){ // left and down
+                return AbsCompareVector2Components(movement) ? Vector2.left : Vector2.down;
+            }else if(movement.x <= 0 && movement.y >= 0){ // left and up
+                return AbsCompareVector2Components(movement) ? Vector2.left : Vector2.up;
+            }
+
+            Debug.LogWarning("SnapTo90: Missed some condition. Direction: " + movement);
+            return movement;
+        }
+
+        private bool AbsCompareVector2Components(Vector2 v){
+            return Mathf.Abs(v.x) >= Mathf.Abs(v.y);
         }
 
     }
