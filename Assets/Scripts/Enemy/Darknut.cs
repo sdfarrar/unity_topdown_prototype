@@ -32,7 +32,9 @@ public class Darknut : MonoBehaviour {
 
     public enum State {
         Patrolling,
-        Scanning,
+        ScanCenter,
+        ScanLeft,
+        ScanRight,
         Chasing,
     }
 
@@ -51,11 +53,13 @@ public class Darknut : MonoBehaviour {
         CurrentState = Look();
         switch(CurrentState){
             case State.Patrolling: velocity = Patrol(); break;
-            case State.Scanning: Scan(); break;
+            case State.ScanLeft: 
+            case State.ScanRight:
+            case State.ScanCenter: Scan(); break;
             case State.Chasing: velocity = Chase(); Attack(); break;
         }
         Character.transform.Translate(velocity);
-        animatorController.Update(velocity);
+        animatorController.Update(velocity, CurrentState);
 	}
 
     private State Look() {
@@ -71,7 +75,8 @@ public class Darknut : MonoBehaviour {
         Vector3 newPos = Vector3.MoveTowards(Character.transform.position, waypoint, Stats.MoveSpeed * Time.deltaTime);
         if(waypoint == Character.transform.position){
             ComputeNextWaypoint();
-            CurrentState = State.Scanning;
+            //CurrentState = State.Scanning;
+            CurrentState = State.ScanLeft;
             rotateLeft = true;
             rotateRight = false;
             elapsedRotation = 0;
@@ -90,12 +95,14 @@ public class Darknut : MonoBehaviour {
 
     private void Scan(){
         if(rotateLeft && RotateLeft()){
+            CurrentState = State.ScanRight;
             rotateLeft = false;
             rotateRight = true;
             elapsedRotation = 0;
             return;
         }
         if(rotateRight && RotateRight()){
+            CurrentState = State.ScanCenter;
             rotateLeft = rotateRight = false;
             elapsedRotation = 0;
             return;
@@ -172,31 +179,45 @@ public class Darknut : MonoBehaviour {
     private class AnimatorController {
         Animator anim;
 
+        private Vector2 lastMovementDirection;
+
         public AnimatorController(Animator anim) {
             this.anim = anim;
         }
 
-        internal void Update(Vector2 velocity) {
+        internal void Update(Vector2 velocity, State state) {
+            //ResetTriggers();
             anim.transform.localScale = new Vector3(1, 1, 1);
 
-            SetAnimTrigger(velocity);
-            if(velocity==Vector2.zero){
-                IdleOnFirstFrame();
+            // Set looking animations when looking to a side
+            if(state==State.ScanLeft || state==State.ScanRight){
+                SetLookAnimTrigger(state);
             }else{
-                anim.speed = 1; // Reset animation speed
+                //Vector2 direction = (state==State.ScanCenter) ? lastMovementDirection : SnapTo90(velocity);
+                if(state==State.ScanCenter){
+                    SetAnimTrigger(lastMovementDirection);
+                }else{
+                    SetAnimTrigger(SnapTo90(velocity));
+                }
+
+                if(velocity==Vector2.zero){
+                    IdleOnFirstFrame();
+                }else{
+                    anim.speed = 1; // Reset animation speed
+                    lastMovementDirection = SnapTo90(velocity);
+                }
             }
 
         }
 
-        void IdleOnFirstFrame(){
+        void IdleOnFirstFrame() {
             // Reset state and freeze on first frame
             int hash = anim.GetCurrentAnimatorStateInfo(0).fullPathHash;
             anim.Play(hash, 0, 0);
             anim.speed = 0;
         }
 
-        void SetAnimTrigger(Vector2 movement){
-            movement = SnapTo90(movement);
+        void SetAnimTrigger(Vector2 movement) {
             if(movement==Vector2.up){
                 anim.SetTrigger("MoveUp");
             }else if(movement==Vector2.down){
@@ -206,7 +227,36 @@ public class Darknut : MonoBehaviour {
             }else if(movement==Vector2.left){
                 anim.SetTrigger("MoveRight");
                 anim.transform.localScale = new Vector3(-1, 1, 1);
+            }else{
+                Debug.Log("UKNOWN DIRECTION");
             }
+        }
+
+        void SetLookAnimTrigger(State state) {
+            if(lastMovementDirection==Vector2.up){
+                anim.SetTrigger( (state==State.ScanLeft) ? "UpLookRight" : "UpLookLeft" ); // LookLeft is relative to facing down so when facing up "left" is "right"
+            }else if(lastMovementDirection==Vector2.down){
+                anim.SetTrigger( (state==State.ScanLeft) ? "DownLookLeft" : "DownLookRight" );
+            }else if(lastMovementDirection==Vector2.right){
+                anim.SetTrigger( (state==State.ScanLeft) ? "RightLookDown" : "RightLookUp" );
+            }else if(lastMovementDirection==Vector2.left){
+                anim.SetTrigger( (state==State.ScanLeft) ? "RightLookUp" : "RightLookDown" );
+                anim.transform.localScale = new Vector3(-1, 1, 1);
+            }else{
+                Debug.Log("UKNOWN DIRECTION");
+            }
+        }
+
+        void ResetTriggers(){
+            anim.ResetTrigger("MoveUp");
+            anim.ResetTrigger("MoveDown");
+            anim.ResetTrigger("MoveRight");
+            anim.ResetTrigger("UpLookLeft");
+            anim.ResetTrigger("UpLookRight");
+            anim.ResetTrigger("DownLookLeft");
+            anim.ResetTrigger("DownLookRight");
+            anim.ResetTrigger("RightLookUp");
+            anim.ResetTrigger("RightLookDown");
         }
 
         // Works fine but in instances where the movement flip flops quickly, it can look bad.
