@@ -75,7 +75,6 @@ public class Darknut : MonoBehaviour {
         Vector3 newPos = Vector3.MoveTowards(Character.transform.position, waypoint, Stats.MoveSpeed * Time.deltaTime);
         if(waypoint == Character.transform.position){
             ComputeNextWaypoint();
-            //CurrentState = State.Scanning;
             CurrentState = State.ScanLeft;
             rotateLeft = true;
             rotateRight = false;
@@ -133,7 +132,6 @@ public class Darknut : MonoBehaviour {
     private void Attack() {
         Vector3 origin = Eyes.transform.position;
 
-
         Collider2D collider = Physics2D.OverlapCircle(origin, Stats.AttackRange, Eyes.targetMask);
         if(collider==null){ return; }
 
@@ -186,78 +184,38 @@ public class Darknut : MonoBehaviour {
         }
 
         internal void Update(Vector2 velocity, State state) {
-            //ResetTriggers();
             anim.transform.localScale = new Vector3(1, 1, 1);
 
-            // Set looking animations when looking to a side
-            if(state==State.ScanLeft || state==State.ScanRight){
-                SetLookAnimTrigger(state);
+            bool isMoving = (velocity.x!=0 || velocity.y!=0);
+            anim.SetBool("IsMoving", isMoving);
+
+            bool isScanning = (state==State.ScanLeft || state==State.ScanRight || state==State.ScanCenter);
+            anim.SetBool("IsScanning", isScanning);
+
+            // Only update if we're moving so we can determine what dirction to use when Idle
+            if(isMoving){
+                anim.SetFloat("MoveX", velocity.x);
+                anim.SetFloat("MoveY", velocity.y);
+                FlipScale(velocity);
+                lastMovementDirection = velocity;
             }else{
-                //Vector2 direction = (state==State.ScanCenter) ? lastMovementDirection : SnapTo90(velocity);
-                if(state==State.ScanCenter){
-                    SetAnimTrigger(lastMovementDirection);
-                }else{
-                    SetAnimTrigger(SnapTo90(velocity));
-                }
-
-                if(velocity==Vector2.zero){
-                    IdleOnFirstFrame();
-                }else{
-                    anim.speed = 1; // Reset animation speed
-                    lastMovementDirection = SnapTo90(velocity);
-                }
+                FlipScale(lastMovementDirection);
             }
-
+            if(isScanning){
+                // Left:-1 Right:1 Center:0
+                int scanDir = state==State.ScanLeft ? -1 : state==State.ScanRight ? 1 : 0;
+                anim.SetFloat("ScanDir", scanDir);
+            }
         }
 
-        void IdleOnFirstFrame() {
-            // Reset state and freeze on first frame
-            int hash = anim.GetCurrentAnimatorStateInfo(0).fullPathHash;
-            anim.Play(hash, 0, 0);
-            anim.speed = 0;
-        }
-
-        void SetAnimTrigger(Vector2 movement) {
-            if(movement==Vector2.up){
-                anim.SetTrigger("MoveUp");
-            }else if(movement==Vector2.down){
-                anim.SetTrigger("MoveDown");
-            }else if(movement==Vector2.right){
-                anim.SetTrigger("MoveRight");
-            }else if(movement==Vector2.left){
-                anim.SetTrigger("MoveRight");
+        void FlipScale(Vector2 movement){
+            if(SnapTo90(movement)==Vector2.left){
                 anim.transform.localScale = new Vector3(-1, 1, 1);
             }else{
-                Debug.Log("UKNOWN DIRECTION");
+                anim.transform.localScale = new Vector3(1, 1, 1);
             }
         }
 
-        void SetLookAnimTrigger(State state) {
-            if(lastMovementDirection==Vector2.up){
-                anim.SetTrigger( (state==State.ScanLeft) ? "UpLookRight" : "UpLookLeft" ); // LookLeft is relative to facing down so when facing up "left" is "right"
-            }else if(lastMovementDirection==Vector2.down){
-                anim.SetTrigger( (state==State.ScanLeft) ? "DownLookLeft" : "DownLookRight" );
-            }else if(lastMovementDirection==Vector2.right){
-                anim.SetTrigger( (state==State.ScanLeft) ? "RightLookDown" : "RightLookUp" );
-            }else if(lastMovementDirection==Vector2.left){
-                anim.SetTrigger( (state==State.ScanLeft) ? "RightLookUp" : "RightLookDown" );
-                anim.transform.localScale = new Vector3(-1, 1, 1);
-            }else{
-                Debug.Log("UKNOWN DIRECTION");
-            }
-        }
-
-        void ResetTriggers(){
-            anim.ResetTrigger("MoveUp");
-            anim.ResetTrigger("MoveDown");
-            anim.ResetTrigger("MoveRight");
-            anim.ResetTrigger("UpLookLeft");
-            anim.ResetTrigger("UpLookRight");
-            anim.ResetTrigger("DownLookLeft");
-            anim.ResetTrigger("DownLookRight");
-            anim.ResetTrigger("RightLookUp");
-            anim.ResetTrigger("RightLookDown");
-        }
 
         // Works fine but in instances where the movement flip flops quickly, it can look bad.
         // Some sort of buffer would work good here
@@ -273,7 +231,6 @@ public class Darknut : MonoBehaviour {
             }else if(movement.x <= 0 && movement.y >= 0){ // left and up
                 return AbsCompareVector2Components(movement) ? Vector2.left : Vector2.up;
             }
-
             Debug.LogWarning("SnapTo90: Missed some condition. Direction: " + movement);
             return movement;
         }
